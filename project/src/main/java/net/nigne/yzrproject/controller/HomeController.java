@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import net.nigne.yzrproject.domain.EmpVO;
-import net.nigne.yzrproject.persistence.EmpDAO;
+import net.nigne.yzrproject.service.EmpService;
 
 /**
  * Handles requests for the application home page.
@@ -15,16 +15,16 @@ import net.nigne.yzrproject.persistence.EmpDAO;
 @Controller
 public class HomeController {
 	@Inject
-	private EmpDAO dao;
+	private EmpService service;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
-		List<EmpVO> list=dao.getList();
+		List<EmpVO> list=service.getList();
 		
-		model.addAttribute("l", list);
+		model.addAttribute("list", list);
 		
 		return "home";
 	}

@@ -5,7 +5,8 @@
 	<title>Home</title>
 </head>
 <body>
-
-	<P> ${l}. </P>
+	<c:forEach items="${ list }" var="emp_list">
+		${ emp_list.emp_no }<br>
+	</c:forEach>
 </body>
 </html>
