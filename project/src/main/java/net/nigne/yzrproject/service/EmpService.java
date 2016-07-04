@@ -6,4 +6,5 @@ import net.nigne.yzrproject.domain.EmpVO;
 
 public interface EmpService {
 	public List<EmpVO> getList();
+	public void empInsert(int no) throws Exception;
 }

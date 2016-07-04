@@ -16,12 +16,12 @@ import net.nigne.yzrproject.service.EmpService;
 public class HomeController {
 	@Inject
 	private EmpService service;
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model) throws Exception {
 		
+		service.empInsert(29);
+
 		List<EmpVO> list=service.getList();
 		
 		model.addAttribute("list", list);

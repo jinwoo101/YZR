@@ -23,5 +23,14 @@ public class EmpDAOImpl implements EmpDAO {
 		
 		return list;
 	}
-
+	@Override
+	public void empInsert(int no) throws Exception{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		EmpVO vo=new EmpVO();
+		vo.setEmp_no(no);
+		vo.setEmp_name(""+no);
+		vo.setAddress(""+no);
+		session.save(vo);
+	}
 }
