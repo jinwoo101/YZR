@@ -16,7 +16,7 @@ public class EmpServiceImpl implements EmpService {
 	@Inject
 	private EmpDAO dao;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	@Override
 	public List<EmpVO> getList() {
 		// TODO Auto-generated method stub
@@ -25,9 +25,6 @@ public class EmpServiceImpl implements EmpService {
 	@Transactional(rollbackFor={Exception.class})
 	@Override
 	public void empInsert(int no) throws Exception{
-		dao.empInsert(no);
-		dao.empInsert(no+1);
-		dao.empInsert(no+2);
 		dao.empInsert(no);
 	}
 }

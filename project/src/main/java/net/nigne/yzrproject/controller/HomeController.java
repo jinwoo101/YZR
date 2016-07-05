@@ -20,7 +20,7 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws Exception {
 		
-		service.empInsert(29);
+		service.empInsert((int)System.currentTimeMillis());
 
 		List<EmpVO> list=service.getList();
 		
