@@ -1,18 +1,13 @@
 package net.nigne.yzrproject.persistence;
 
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import net.nigne.yzrproject.domain.EmpVO;
 
 @Repository
@@ -36,7 +31,6 @@ public class EmpDAOImpl implements EmpDAO {
 	@Override
 	public void empInsert(int no) throws Exception{
 		// TODO Auto-generated method stub
-		
 		EmpVO vo=new EmpVO();
 		vo.setEmp_no(no);
 		vo.setEmp_name(""+no);
