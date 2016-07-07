@@ -11,18 +11,18 @@ import net.nigne.yzrproject.domain.EmpVO;
 import net.nigne.yzrproject.service.EmpService;
 
 @Controller
-public class HomeController {
+public class DetailController {
 	@Autowired
 	private EmpService service;
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws Exception {
 		
-		List<EmpVO> list=service.getList();
+//		List<EmpVO> list=service.getList();
+//		
+//		model.addAttribute("list", list);
 		
-		model.addAttribute("list", list);
-		
-		return "home";
+		return "detail";
 	}
 	
 }
