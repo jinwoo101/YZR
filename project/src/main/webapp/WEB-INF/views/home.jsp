@@ -2,7 +2,9 @@
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="./include/header.jsp" %>
-	<c:forEach items="${ list }" var="emp_list">
-		${ emp_list.emp_no }<br>
-	</c:forEach>
+<div id="wrap_content" style="min-height: 100%; position: relative;">
+	<div id="content" style="padding-bottom: 150px;">
+		home
+	</div>	
+</div>
 <%@include file="./include/footer.jsp" %>

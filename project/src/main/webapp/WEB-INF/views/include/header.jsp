@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- Header begin -->
 <html lang="ko">
 <head>
@@ -42,7 +43,14 @@ font{
 			<div class="container-fluid" style="padding:0px;">
 				<div class="navbar-header" style="background-color:white; border-bottom:1px solid #000;">
 					<ul class="nav navbar-nav navbar-right">				
-						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						<c:choose>
+							<c:when test="${ member_id != null }">
+							 	<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+							 	<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+							</c:otherwise>
+						 </c:choose>
 						<li><a href="#"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-home"></span> MyYZR</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-star"></span> Club서비스</a></li>
@@ -56,7 +64,12 @@ font{
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color:#ffffcc; border-bottom:1px solid #000;">
 					<ul class="nav navbar-nav" style="width: 100%; text-align: center;">
-						<li style="float: none; display: inline-block;"><a href="#"><font style="font-size:20pt; font-weight:bold;">선택한 메뉴</font></a></li>
+						<li style="float: none; display: inline-block;">
+						<a href="#">
+							<font style="font-size:20pt; font-weight:bold;">
+								<c:choose><c:when test="${ session.getAttribute('menu') != null }">${ session.getAttribute('menu') }</c:when><c:otherwise>CULTUREPLEX</c:otherwise></c:choose>
+							</font>
+						</a></li>
 					</ul>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color:#ffffcc; border-bottom:1px solid #000;">

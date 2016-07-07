@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import net.nigne.yzrproject.domain.EmpVO;
 import net.nigne.yzrproject.persistence.EmpDAO;
 
-@Transactional
 @Service
 public class EmpServiceImpl implements EmpService {
 	@Autowired
