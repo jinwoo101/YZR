@@ -3,6 +3,182 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="./include/header.jsp"%>
+<link rel="stylesheet" href="http://jquery-ui.googlecode.com/svn/tags/1.8.19/themes/ui-lightness/jquery.ui.all.css" type="text/css" media="screen" title="no title" charset="utf-8" />    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style type="text/css"> 
+	div#container {width: 500px; height: 400px; margin: auto}
+	div#button_box {width:100%;    margin:auto; text-align:center}
+	button {margin:0px 20px}
+	.playing {border:1px solid #FF0000}
+</style> 
+<script type="text/javascript"> 
+$(function () {
+
+	$('#container1').highcharts({
+
+        chart: {
+            polar: true,
+            type: 'line'
+        },
+
+        title: {
+            text: 'Budget vs spending',
+            x: -80
+        },
+
+        pane: {
+            size: '50%'
+        },
+
+        xAxis: {
+            categories: ['Sales', 'Marketing', 'Development', 'Customer Support',
+                    'Information Technology', 'Administration'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0
+        },
+
+        legend: {
+            align: 'right',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+
+        series: [{
+            name: 'Allocated Budget',
+            data: [43000, 19000, 60000, 35000, 17000, 10000],
+            pointPlacement: 'on'
+        }]
+    });
+});
+
+
+$(function () {
+
+    // Make monochrome colors and set them as default for all pies
+    Highcharts.getOptions().plotOptions.pie.colors = (function () {
+        var colors = [],
+            base = Highcharts.getOptions().colors[0],
+            i;
+
+        for (i = 0; i < 10; i += 1) {
+            // Start out with a darkened base color (negative brighten), and end
+            // up with a much brighter color
+            colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+        }
+        return colors;
+    }());
+
+    // Build the chart
+    $('#container2').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Browser market shares at a specific website, 2014'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            data: [
+                { name: 'Microsoft Internet Explorer', y: 56.33 },
+                { name: 'Chrome', y: 24.03 },
+                { name: 'Firefox', y: 10.38 },
+                { name: 'Safari', y: 4.77 },
+                { name: 'Opera', y: 0.91 },
+                { name: 'Proprietary or Undetectable', y: 0.2 }
+            ]
+        }]
+    });
+});
+
+$(function () {
+
+    // Make monochrome colors and set them as default for all pies
+    Highcharts.getOptions().plotOptions.pie.colors = (function () {
+        var colors = [],
+            base = Highcharts.getOptions().colors[0],
+            i;
+
+        for (i = 0; i < 10; i += 1) {
+            // Start out with a darkened base color (negative brighten), and end
+            // up with a much brighter color
+            colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+        }
+        return colors;
+    }());
+
+    // Build the chart
+    $('#container3').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Browser market shares at a specific website, 2014'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            data: [
+                { name: 'Microsoft Internet Explorer', y: 56.33 },
+                { name: 'Chrome', y: 24.03 },
+                { name: 'Firefox', y: 10.38 },
+                { name: 'Safari', y: 4.77 },
+                { name: 'Opera', y: 0.91 },
+                { name: 'Proprietary or Undetectable', y: 0.2 }
+            ]
+        }]
+    });
+});
+
+</script> 
+    
 <style>
 table {
 	border-top: 1px solid black;
@@ -63,9 +239,11 @@ table {
 			</tr>
 		</thead>
 		<tr>
-			<td>a</td>
-			<td>a</td>
-			<td>a</td>
+			<td>    
+				<div id="container1" style="width: 350px; height: 300px; padding-left: 50px;"></div> 
+    		</td>
+			<td><div id="container2" style="width: 250px; height: 300px;margin-left: 10px;"></div> </td>
+			<td><div id="container3" style="width: 250px; height: 300px;margin-left: 10px;"></div></td>
 		</tr>
 	</table>
 </div>
