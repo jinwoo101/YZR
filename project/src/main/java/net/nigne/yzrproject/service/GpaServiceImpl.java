@@ -13,11 +13,11 @@ public class GpaServiceImpl implements GpaService {
 	
 	@Autowired
 	private GpaDAO dao;
-	
-	@Transactional(readOnly=true)
+		
+	@Transactional(rollbackFor={Exception.class})
 	@Override
-	public GpaVO getList(String movie_id) {
+	public void gpaInsert(String movie_id, String acting) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.getList(movie_id);
+		dao.gpaInsert(movie_id, acting);		
 	}
 }

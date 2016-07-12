@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import net.nigne.yzrproject.domain.ActorVO;
 import net.nigne.yzrproject.domain.DetailVO;
+import net.nigne.yzrproject.domain.EmpVO;
 import net.nigne.yzrproject.domain.GpaVO;
 
 @Repository
@@ -20,16 +21,13 @@ public class GpaDAOImpl implements GpaDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	
 	@Override
-	public GpaVO getList(String movie_id) {
+	public void gpaInsert(String movie_id,String acting) throws Exception{
 		// TODO Auto-generated method stub
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<GpaVO> cq=cb.createQuery(GpaVO.class);
-		Root<GpaVO> root = cq.from(GpaVO.class);
-		Predicate p = cb.equal(root.get("movie_id"), movie_id);
-		cq.select(root).where(p);
-		TypedQuery<GpaVO> tq = entityManager.createQuery(cq);
-		GpaVO gpavo = tq.getSingleResult();
-		return gpavo ;
+		GpaVO vo = new GpaVO();
+		vo.setMovie_id(movie_id);
+		vo.setActing(acting);
+		entityManager.persist(vo);
 	}
 }

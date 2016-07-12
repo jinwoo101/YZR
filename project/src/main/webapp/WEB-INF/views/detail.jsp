@@ -242,107 +242,126 @@ table {
 <div class="modal fade" id="myModal" role="dialog" style="margin: 0 auto;">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-header">
-				<H2>평점을 입력하세요</H2>
-			</div>
-			<div class="modal-body">
-				<font style="size: 20px; font-weight: bold;">배우연기</font>
-				<form role="form">
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="1">1점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="2">2점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="3">3점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="4">4점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="5">5점
-					</label>										
-				</form>
-				<font style="size: 20px; font-weight: bold;">감독연출</font>
-				<form role="form">
-						<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="1">1점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="2">2점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="3">3점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="4">4점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="5">5점
-					</label>										
-				</form>
+			<form id="form">
+				<div class="modal-header">
+					<H2>평점을 입력하세요</H2>
+				</div>
 				
-				<font style="size: 20px; font-weight: bold;">영상미</font>
-				<form role="form">
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="1">1점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="2">2점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="3">3점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="4">4점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="5">5점
-					</label>							
-				</form>				
-				<font style="size: 20px; font-weight: bold;">OST</font>
-				<form role="form">
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="1">1점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="2">2점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="3">3점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="4">4점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="5">5점
-					</label>													
-				</form>		
-				<font style="size: 20px; font-weight: bold;">스토리</font>
-				<form role="form">
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="1">1점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="2">2점
-					</label> 
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="3">3점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio"	name="optradio" value="4">4점
-					</label>
-					<label class="radio-inline"> 
-						<input type="radio" name="optradio" value="5">5점
-					</label>									
-				</form>			
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">등록</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+				<div class="modal-body">
+				
+					<font style="size: 20px; font-weight: bold;">배우연기</font>
+					
+						<label class="radio-inline"> 
+							<input type="radio"	name="acting" value="1">1점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="acting" value="2">2점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="acting" value="3">3점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio"	name="acting" value="4">4점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio" name="acting" value="5">5점
+						</label>										
+					<font style="size: 20px; font-weight: bold;">감독연출</font><br>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio2" value="1">1점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio2" value="2">2점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio2" value="3">3점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio2" value="4">4점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio2" value="5">5점
+						</label>										
+					<font style="size: 20px; font-weight: bold;">영상미</font><br>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio3" value="1">1점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio3" value="2">2점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio3" value="3">3점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio3" value="4">4점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio3" value="5">5점
+						</label>							
+					<font style="size: 20px; font-weight: bold;">OST</font><br>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio4" value="1">1점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio4" value="2">2점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio4" value="3">3점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio4" value="4">4점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio4" value="5">5점
+						</label>													
+					<font style="size: 20px; font-weight: bold;">스토리</font><br>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio5" value="1">1점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio5" value="2">2점
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio5" value="3">3점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio"	name="optradio5" value="4">4점
+						</label>
+						<label class="radio-inline"> 
+							<input type="radio" name="optradio5" value="5">5점
+						</label>									
+								
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertgpa()">등록</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
+
+<script>
+
+
+function insertgpa(){
+	var acting = $(':radio[name="acting"]:checked').val();
+	alert(acting);
+	$.ajax({
+		type : 'post',
+		url : '/detail',
+		headers : { 
+			"Content-Type" : "application/json" 
+			},
+		data : JSON.stringify({
+			"acting" : acting
+			}) ,
+		dataType : 'json',
+		success : function(result){
+			if(result == "SUCCESS"){
+			}
+		}
+	});
+}
+</script>
 <%@include file="./include/footer.jsp"%>

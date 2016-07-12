@@ -23,4 +23,5 @@ public class EmpServiceImpl implements EmpService {
 	public void empInsert(int no) throws Exception{
 		dao.empInsert(no);
 	}
+	
 }

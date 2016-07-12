@@ -7,6 +7,5 @@ import net.nigne.yzrproject.domain.GpaVO;
 
 public interface GpaService {
 	
-	public GpaVO getList(String movie_id);
-	
+	public void gpaInsert(String movie_id,String acting) throws Exception;
 }
