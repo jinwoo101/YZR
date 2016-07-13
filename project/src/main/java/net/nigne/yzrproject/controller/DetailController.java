@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import net.nigne.yzrproject.domain.ActorVO;
 import net.nigne.yzrproject.domain.DetailVO;
@@ -37,34 +38,66 @@ public class DetailController {
 	@Autowired
 	private GpaService service3;
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) throws Exception {
-		
-		String movie_id = "a"; 
+	@RequestMapping(value = "/detail/{movie_id}", method = RequestMethod.GET)
+	public String home(Locale locale, Model model, @PathVariable("movie_id") String movie_id) throws Exception {
 		DetailVO vo=service.getList(movie_id);
 		model.addAttribute("vo", vo);
 		List<ActorVO> actorlist = service1.getList(movie_id);
 		model.addAttribute("actorlist", actorlist);
 		List<DirectorVO> directorlist = service2.getList(movie_id);
 		model.addAttribute("directorlist", directorlist);
-		
 		return "detail";
 	}
 
-	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public ResponseEntity<String> insert(@RequestBody GpaVO vo){
-		ResponseEntity<String> entity = null;
-		System.out.println("acting            "+vo.getActing());
+//	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+//	public ResponseEntity<String> insert(@RequestBody GpaVO vo){
+//		ResponseEntity<String> entity = null;
+//		System.out.println("acting"+vo.getActing());
+//		try{
+//			String movie_id = "a"+Math.random();
+//			service3.gpaInsert(movie_id, vo.getActing() , vo.getDirection(),vo.getBeauty(),vo.getOst(),vo.getStory());
+//			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+//			System.out.println("5555555555555555");
+//		}catch(Exception e){
+//			System.out.println("6666666");
+//			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+//		}
+//		System.out.println("7777777777777755");
+//		return entity;
+//	}
+//	
+	@RequestMapping(value = "/detail/chart/{movie_id}", method = RequestMethod.GET)
+	public ResponseEntity<GpaVO> get(@PathVariable("movie_id") String movie_id){
+		ResponseEntity<GpaVO> entity = null;
+		
 		try{
-			String movie_id = "aaa47ssdaa";
-			service3.gpaInsert(movie_id, vo.getActing());
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			GpaVO vo = service3.get(movie_id);
+			entity = new ResponseEntity<>(vo, HttpStatus.OK);
 			System.out.println("5555555555555555");
 		}catch(Exception e){
 			System.out.println("6666666");
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		System.out.println("7777777777777755");
 		return entity;
 	}
+	
+	@RequestMapping(value = "/detail/chart/{movie_id}", method = RequestMethod.PUT)
+	public ResponseEntity<String> update(@PathVariable("movie_id") String movie_id,@RequestBody GpaVO vo, @RequestParam("data") GpaVO data){
+		ResponseEntity<String> entity = null;
+		System.out.println("acting"+vo.getActing());
+		try{
+			System.out.println("가나난나나나나"+data.getActing());
+			service3.gpaUpdate(data,movie_id,vo.getActing(),vo.getDirection(),vo.getBeauty(),vo.getOst(),vo.getStory());
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			System.out.println("5222222555555");
+		}catch(Exception e){
+			System.out.println("6662222666");
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		System.out.println("777777222227777755");
+		return entity;
+	}
+	
+	
 }

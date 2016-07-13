@@ -14,37 +14,37 @@ public class GpaVO {
 	String movie_id;
 	
 	@Column(name="direction")
-	String direction;
+	int direction;
 	
 	@Column(name="ost")
-	String ost;
+	int ost;
 	
 	@Column(name="story")
-	String story;
+	int story;
 	
 	@Column(name="acting")
-	String acting;	
+	int acting;	
 	
 	@Column(name="beauty")
-	String beauty;
+	int beauty;
 	
 	@Column(name="male")
-	String male;	
+	int male;	
 	
 	@Column(name="female")
-	String female;	
+	int female;	
 	
 	@Column(name="teenager")
-	String teenager;
+	int teenager;
 	
 	@Column(name="twenties")
-	String twenties;
+	int twenties;
 	
 	@Column(name="thirties")
-	String thirties;
+	int thirties;
 	
 	@Column(name="forties")
-	String forties;
+	int forties;
 
 	public String getMovie_id() {
 		return movie_id;
@@ -54,91 +54,93 @@ public class GpaVO {
 		this.movie_id = movie_id;
 	}
 
-	public String getDirection() {
+	public int getDirection() {
 		return direction;
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(int direction) {
 		this.direction = direction;
 	}
 
-	public String getOst() {
+	public int getOst() {
 		return ost;
 	}
 
-	public void setOst(String ost) {
+	public void setOst(int ost) {
 		this.ost = ost;
 	}
 
-	public String getStory() {
+	public int getStory() {
 		return story;
 	}
 
-	public void setStory(String story) {
+	public void setStory(int story) {
 		this.story = story;
 	}
 
-	public String getActing() {
+	public int getActing() {
 		return acting;
 	}
 
-	public void setActing(String acting) {
+	public void setActing(int acting) {
 		this.acting = acting;
 	}
 
-	public String getBeauty() {
+	public int getBeauty() {
 		return beauty;
 	}
 
-	public void setBeauty(String beauty) {
+	public void setBeauty(int beauty) {
 		this.beauty = beauty;
 	}
 
-	public String getMale() {
+	public int getMale() {
 		return male;
 	}
 
-	public void setMale(String male) {
+	public void setMale(int male) {
 		this.male = male;
 	}
 
-	public String getFemale() {
+	public int getFemale() {
 		return female;
 	}
 
-	public void setFemale(String female) {
+	public void setFemale(int female) {
 		this.female = female;
 	}
 
-	public String getTeenager() {
+	public int getTeenager() {
 		return teenager;
 	}
 
-	public void setTeenager(String teenager) {
+	public void setTeenager(int teenager) {
 		this.teenager = teenager;
 	}
 
-	public String getTwenties() {
+	public int getTwenties() {
 		return twenties;
 	}
 
-	public void setTwenties(String twenties) {
+	public void setTwenties(int twenties) {
 		this.twenties = twenties;
 	}
 
-	public String getThirties() {
+	public int getThirties() {
 		return thirties;
 	}
 
-	public void setThirties(String thirties) {
+	public void setThirties(int thirties) {
 		this.thirties = thirties;
 	}
 
-	public String getForties() {
+	public int getForties() {
 		return forties;
 	}
 
-	public void setForties(String forties) {
+	public void setForties(int forties) {
 		this.forties = forties;
 	}
+
+
 }

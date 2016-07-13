@@ -14,10 +14,19 @@ public class GpaServiceImpl implements GpaService {
 	@Autowired
 	private GpaDAO dao;
 		
+//	@Transactional(rollbackFor={Exception.class})
+//	@Override
+//	public void gpaInsert(String movie_id, int acting, int direction, int beauty, int ost, int story) throws Exception {
+//		// TODO Auto-generated method stub
+//		dao.gpaInsert(movie_id, acting, direction, beauty, ost, story);		
+//	}
 	@Transactional(rollbackFor={Exception.class})
 	@Override
-	public void gpaInsert(String movie_id, String acting) throws Exception {
-		// TODO Auto-generated method stub
-		dao.gpaInsert(movie_id, acting);		
+	public GpaVO get(String movie_id) {
+		return dao.get(movie_id);
+	}
+	@Override
+	public void gpaUpdate(GpaVO data,String movie_id, int acting, int direction, int beauty, int ost, int story) throws Exception {
+		dao.gpaUpdate( data,movie_id, acting, direction, beauty, ost, story);	
 	}
 }
