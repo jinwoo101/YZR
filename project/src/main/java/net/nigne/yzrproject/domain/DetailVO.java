@@ -21,6 +21,14 @@ public class DetailVO {
 	@Column(name="open_date")
 	Timestamp open_date;
 	
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
 	@Column(name="runtime")
 	int runtime;
 	

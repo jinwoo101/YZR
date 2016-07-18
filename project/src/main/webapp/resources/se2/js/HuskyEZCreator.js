@@ -100,7 +100,6 @@ nhn.husky.EZCreator = new (function(){
 		});
 //		window.STime = new Date();
 		elIFrame.src = sSkinURI;
-		this.elIFrame = elIFrame;
 	};
 	
 	this.showBlocker = function(){

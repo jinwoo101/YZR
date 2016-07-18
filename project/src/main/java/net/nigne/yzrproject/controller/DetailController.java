@@ -1,10 +1,13 @@
 package net.nigne.yzrproject.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,13 +109,14 @@ public class DetailController {
 	}
 	
 
-	@RequestMapping(value = "/review/new/", method = RequestMethod.POST)
+	@RequestMapping(value = "/review/new/{movie_id}", method = RequestMethod.POST)
 	public ResponseEntity<String> review_insert(@RequestBody ReviewVO vo,@PathVariable("movie_id") String movie_id) {
 		ResponseEntity<String> entity = null;
+
 		try {
 			service.reviewInsert(vo.getMember_id(), movie_id , vo.getReview_title(), vo.getReview_content(),vo.getReview_date(),vo.getReview_cnt(),vo.getReview_file(), vo.getReview_like());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-			System.out.println("55555555�뜝�럩肉��뜝�럩�졑5555");
+			System.out.println("555555555555");
 		} catch (Exception e) {
 			System.out.println("6666666");
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -178,34 +182,4 @@ public class DetailController {
 		}
 		return entity;
 	}
-	
-	@RequestMapping(value = "/detail/review_read/{review_no}/{page}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> listPage(
-			@PathVariable("review_no") Integer review_no,
-			@PathVariable("page") Integer page   ) {
-		ResponseEntity<Map<String, Object>> entity = null;
-		try{
-			// ������ ó���� ���� Criteria ����
-			Criteria criteria = new Criteria();
-			criteria.setPage(page);
-			// ��� ���� ��������
-			long replyTotal = service.getReplyCount(review_no);
-			// ��� ��������
-			List<ReplyVO> list = service.getreplyPage(review_no, criteria);
-			// ������ ����Ŀ�� �� ��� ������, ������������ �ִ� Criteria �� �Ѱܼ�
-			// ����¡ ���� ����Ѵ�
-			PageMaker pm = new PageMaker(criteria, replyTotal);
-			// ���������� Map �� ��� ��ϰ� ����¡ ó�� ���� ��Ƽ� 
-			Map<String, Object> map = new HashMap<>();
-			map.put("l", list);
-			map.put("p", pm);
-			// �������� �����Ѵ�
-			entity = new ResponseEntity<>(map, HttpStatus.OK);
-		}catch(Exception e){
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
-		}
-		return entity;
-	}
-	
-	
 }

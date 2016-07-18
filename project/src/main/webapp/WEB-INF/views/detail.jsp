@@ -20,7 +20,7 @@
 			<hr style="border: solid 1px black; margin: 0 auto;">
 		</div>
 		<div>
-			<img src="http://img.cgv.co.kr/R2014/images/title/h1_cgv.png"
+			<img src="${vo.poster}"
 				alt="CGV" style="float: left; height: 300px; width: 220px;">
 		</div>
 		<div style="margin-left: 30px;">
@@ -101,8 +101,9 @@
 		<h1>게시글 목록</h1>
 		<table class="table table-striped">
 			<thead>
-				<th>title</th>
+				<th>no</th>
 				<th>username</th>
+				<th>title</th>
 				<th>regdate</th>
 				<th>view_cnt</th>
 			</thead>
@@ -428,13 +429,13 @@ function setReviewList(data){
 	
 	$(data).each(function(){
 		result += "<td>" 
-		+ "<a href='javascript:review_read("+this.no+")'>"+this.review_title+"</a>"
-		+"</td>"
-		+"<td>"
 		+this.no
 		+"</td>"
 		+"<td>"
-		+this.member_id 
+		+this.member_id
+		+"</td>"
+		+"<td>"
+		+"<a href='javascript:review_read("+this.no+")'>"+this.review_title+"</a>"
 		+"</td>"
 		+"<td>"
 		+this.review_date

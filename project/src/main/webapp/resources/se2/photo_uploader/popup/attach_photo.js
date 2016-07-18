@@ -330,13 +330,11 @@
      * HTML5 DragAndDrop으로 사진을 추가하고, 확인버튼을 누른 경우에 동작한다.
      * @return
      */
-    function html5Upload() {
-    	alert("01");
+    function html5Upload() {	
     	var tempFile,
     		sUploadURL;
     	
-//    	sUploadURL= 'file_uploader_html5.php'; 	//upload URL
-    	sUploadURL= 'file_uploader.jsp'; 	//upload URL
+    	sUploadURL= 'file_uploader_html5.php'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -353,29 +351,29 @@
 	}
     
     function callAjaxForHTML5 (tempFile, sUploadURL){
-    	
     	var oAjax = jindo.$Ajax(sUploadURL, {
 			type: 'xhr',
 			method : "post",
 			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
+				var sResString = res._response.responseText;
 				if (res.readyState() == 4) {
-					//성공 시에  responseText를 가지고 array로 만드는 부분.
-					
-					makeArrayFromString(res._response.responseText);
+					if(sResString.indexOf("NOTALLOW_") > -1){
+						var sFileName = sResString.replace("NOTALLOW_", "");
+						alert("이미지 파일(jpg,gif,png,bmp)만 업로드 하실 수 있습니다. ("+sFileName+")");
+					}else{
+						//성공 시에  responseText를 가지고 array로 만드는 부분.
+						makeArrayFromString(res._response.responseText);
+					}
 				}
 			},
 			timeout : 3,
 			onerror :  jindo.$Fn(onAjaxError, this).bind()
 		});
-    	
 		oAjax.header("contentType","multipart/form-data");
 		oAjax.header("file-name",encodeURIComponent(tempFile.name));
 		oAjax.header("file-size",tempFile.size);
-		
 		oAjax.header("file-Type",tempFile.type);
-		
 		oAjax.request(tempFile);
-		
     }
     
     function makeArrayFromString(sResString){
@@ -480,9 +478,8 @@
  	 */
  	function callFileUploader (){
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
-// 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
- 			sUrl  :file_uploader.jsp,	//샘플 URL입니다.
- 	        sCallback :callback.html,	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+ 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
+ 	        sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
  	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
  	    	bAutoUpload : false,									 	//파일이 선택됨과 동시에 자동으로 업로드를 수행할지 여부 (upload 메소드 수행)

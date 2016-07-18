@@ -110,7 +110,7 @@ public class DetailDAOImpl implements DetailDAO {
 			String review_date, int review_cnt, String review_file, String review_like) throws Exception {
 		ReviewVO vo = new ReviewVO();
 		vo.setMovie_id(movie_id);
-		vo.setMember_id("a");
+		vo.setMember_id(member_id);
 		vo.setReview_title(review_title);
 		// vo.setNo(3);
 		vo.setReview_content(review_content);
