@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NaturalIdCache;
 
 @Entity
 @Table(name="movie")

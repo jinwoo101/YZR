@@ -142,5 +142,4 @@ public class GpaVO {
 		this.forties = forties;
 	}
 
-
 }
