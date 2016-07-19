@@ -64,7 +64,27 @@ public class DetailController {
 		
 		List<ReplyVO> replylist1 = service.getreply_reply(no);
 		model.addAttribute("replylist1", replylist1);
+		
+		service.Reviewcnt_Update(no, reviewvo.getReview_cnt());
 		return "review_read";
+	}
+
+	@RequestMapping(value = "detail/reply/{no}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> reply_read(Locale locale, Model model,@PathVariable("no") int no) throws Exception {
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		try{
+			List<ReplyVO> replylist = service.getreply(no);	
+			List<ReplyVO> replylist1 = service.getreply_reply(no);
+			Map<String, Object> map = new HashMap<>();
+			map.put("replylist", replylist);
+			map.put("replylist1", replylist1);
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+
+		} catch (Exception e){
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+		}
+		return entity;
 	}
 	
 
@@ -82,6 +102,7 @@ public class DetailController {
 		System.out.println("7777777777777755");
 		return entity;
 	}
+	
 
 	@RequestMapping(value = "/detail/chart/{movie_id}", method = RequestMethod.POST)
 	public ResponseEntity<String> update(@PathVariable("movie_id") String movie_id, @RequestBody GpaVO vo) {

@@ -109,28 +109,34 @@ public class DetailServiceImpl implements DetailService {
 		dao.reply_reply_insert(reply_no, review_no, user_id, reply_content, reply_date, reply_reply);
 		
 	}
-
+	@Transactional(rollbackFor = { Exception.class })
 	@Override
 	public long getTotalCount(String movie_id) {
 		// TODO Auto-generated method stub
 		return dao.getTotalCount(movie_id);
 	}
-
+	@Transactional(rollbackFor = { Exception.class })
 	@Override
 	public List<ReviewVO> getListPage(String movie_id, Criteria criteria) {
 		// TODO Auto-generated method stub
 		return dao.getListPage(movie_id, criteria);
 	}
-
+	@Transactional(rollbackFor = { Exception.class })
 	@Override
 	public long getReplyCount(int review_no) {
 		// TODO Auto-generated method stub
 		return dao.getReplyCount(review_no);
 	}
-
+	@Transactional(rollbackFor = { Exception.class })
 	@Override
 	public List<ReplyVO> getreplyPage(int review_no, Criteria criteria) {
 		// TODO Auto-generated method stub
 		return dao.getreplyPage(review_no, criteria);
+	}
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public void Reviewcnt_Update(int no, int review_cnt) throws Exception {
+		// TODO Auto-generated method stub
+		dao.Reviewcnt_Update(no, review_cnt);
 	}
 }

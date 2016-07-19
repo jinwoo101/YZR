@@ -106,6 +106,15 @@ public class DetailDAOImpl implements DetailDAO {
 	}
 
 	@Override
+	public void Reviewcnt_Update(int no, int review_cnt) throws Exception {
+		
+		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_read(no).getNo());
+		ReviewVO mergevo = entityManager.merge(vo);
+		mergevo.setReview_cnt(review_cnt + 1);
+	}
+
+
+	@Override
 	public void reviewInsert(String member_id, String movie_id, String review_title, String review_content,
 			String review_date, int review_cnt, String review_file, String review_like) throws Exception {
 		ReviewVO vo = new ReviewVO();
@@ -162,6 +171,7 @@ public class DetailDAOImpl implements DetailDAO {
 		ReviewVO vo = tq.getSingleResult();
 		return vo;
 	}
+	
 
 	@Override
 	public void replyinsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date,
@@ -279,5 +289,6 @@ public class DetailDAOImpl implements DetailDAO {
 		List<ReplyVO> replywpagelist = tq.getResultList();
 		return replywpagelist;
 	}
+
 
 }

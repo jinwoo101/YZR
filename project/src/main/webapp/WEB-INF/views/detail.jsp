@@ -21,47 +21,46 @@
 		</div>
 		<div>
 			<img src="${vo.poster}"
-				alt="CGV" style="float: left; height: 300px; width: 220px;">
+				alt="CGV" style="float: left; height: 280px; width: 200px; margin-left: 30px; margin-top: 40px;">
 		</div>
-		<div style="margin-left: 30px;">
-			<span style="margin-top: 10px; margin-left: 10px;"> <font
-				size="5px"> ${vo.title }</font>
-			</span> <span class="label label-primary"
-				style="padding-top: 8px; padding-bottom: 12px;"> 현재 상영중 </span>
-
+		<div style="margin-left: 30px;margin-top: 40px;">
+			<span style=" margin-left: 20px; margin-top: 10px;"> 
+				<font size="5px"> ${vo.title }</font>
+			</span> 
+			<span class="label label-primary" style="padding-top: 12px; padding-bottom: 12px;"> 현재 상영중 </span>
 		</div>
 		<hr>
 		<div>
-			<span style="margin-left: 10px; margin-bottom: 10px;"> <font
+			<span style="margin-left: 20px; margin-bottom: 10px;"> <font
 				face="NanumBarunGothicBold">감독 :</font> <c:forEach
 					items="${directorlist}" var="directorlist">
-						 ${directorlist.director_name }, 	
-					</c:forEach> /
+						 ${directorlist.director_name }	
+					</c:forEach> 
 			</span> <span style="margin-left: 10px; margin-bottom: 10px;">배우 : <c:forEach
 					items="${actorlist}" var="actorlist">
-						${actorlist.actor_name }
+						${actorlist.actor_name }   
 					</c:forEach>
 			</span>
 		</div>
 		<div>
-			<span style="margin-left: 10px; margin-bottom: 10px;">장르 : <c:forEach
+			<span style="margin-left: 20px; margin-bottom: 10px;">장르 : <c:forEach
 					items="${genrelist}" var="genrelist">
 						${genrelist.movie_genre }
 					</c:forEach>
 			</span>
 		</div>
 		<div>
-			<span style="margin-left: 10px; margin-bottom: 10px;"> 개봉일 : ${vo.open_date } </span>
+			<span style="margin-left: 20px; margin-bottom: 10px;"> 개봉일 : ${vo.open_date } </span>
 		</div>
 
 		<div>
-			<span style="margin-left: 10px; margin-bottom: 10px;"> 공식 사이트 : ${ vo.site } </span>
+			<span style="margin-left: 20px; margin-bottom: 10px;"> 공식 사이트 : ${ vo.site } </span>
 		</div>
 
 		<div
 			style="margin-top: 10px; margin-left: 90px; margin-bottom: 45px; margin-top: 20px;">
 			<span class="label label-danger"
-				style="padding-top: 10px; padding-bottom: 10px;">예매하러가기 </span>
+				style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px;">예매하러가기 </span>
 		</div>
 		<div style="margin-left: 450px;">
 			<button type="button" class="btn btn-danger" onclick="SetFocus()">평점/후기</button>
@@ -71,7 +70,7 @@
 			<textarea readonly="readonly"
 				style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; 
 				border-top-left-radius: 10px; border-top-right-radius: 10px; padding: 10px;
-				 border: 1px solid gray; width: 1100px; height: 300px;
+				 border: 1px solid gray; width: 1100px; height: 450px;
 				  resize: none; margin-top: 20px; margin-left: 20px;">  ${vo.story }
 			</textarea>
 		</div>
@@ -101,16 +100,18 @@
 		<h1>게시글 목록</h1>
 		<table class="table table-striped">
 			<thead>
-				<th>no</th>
-				<th>username</th>
-				<th>title</th>
-				<th>regdate</th>
-				<th>view_cnt</th>
+				<tr class="danger">
+					<th>no</th>
+					<th>title</th>
+					<th>username</th>					
+					<th>regdate</th>
+					<th>view_cnt</th>
+				<tr>	
 			</thead>
 			<tbody id="reviw_table">
 			</tbody>
 		</table>
-		<div id="review_page"></div>
+		<div id="review_page" style="text-align: center;"></div>
 	</div>
 </div>
 <div class="modal fade" id="myModal" role="dialog"
@@ -203,8 +204,10 @@
 	</div>
 </div>
 <script>
+
 function review_read(no) {
 	location.href = "/detail/review_read/" + no;
+	
 }
 function review_write(id) {
 	location.href = "/review/" + id;
@@ -432,11 +435,11 @@ function setReviewList(data){
 		+this.no
 		+"</td>"
 		+"<td>"
-		+this.member_id
-		+"</td>"
-		+"<td>"
 		+"<a href='javascript:review_read("+this.no+")'>"+this.review_title+"</a>"
 		+"</td>"
+		+"<td>"
+		+this.member_id
+		+"</td>"		
 		+"<td>"
 		+this.review_date
 		+"</td>"
@@ -463,7 +466,7 @@ function getReviewList(page){
 		data : '',
 		success : function(result){
 			setReviewList(result.l);
-			setPagePrint(result.p)
+			setPagePrint(result.p);
 		}
 	});
 }

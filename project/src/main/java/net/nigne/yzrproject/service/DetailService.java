@@ -33,5 +33,6 @@ public interface DetailService {
 	public List<ReviewVO> getListPage(String movie_id, Criteria criteria);
 	public long getReplyCount(int review_no);
 	public List<ReplyVO> getreplyPage(int review_no, Criteria criteria);
-	
+	public void Reviewcnt_Update(int no, int review_cnt) throws Exception;
+
 }

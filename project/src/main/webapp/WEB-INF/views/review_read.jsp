@@ -31,7 +31,7 @@
 }
 
 hr.hrone, hr.hrtwo {
-	width: 997px;
+	width: 990px;
 	border: 1;
 	border-top: 1px solid;
 }
@@ -39,6 +39,7 @@ hr.hrone, hr.hrtwo {
 #reply_write_wrap {
 	height: 160px;
 	background-color: #F5F6F9;
+	margin-bottom: 30px;
 }
 
 #reply_submit {
@@ -52,8 +53,8 @@ hr.hrone, hr.hrtwo {
 	width: 200px;
 }
 
-#div_re_uid {
-	margin-left: 20px;
+#div_re_uid , .reply_list_wrap2 {
+	margin-left: 10px;
 }
 
 #reply_write_submit_2, #like2 {
@@ -81,7 +82,7 @@ hr.hrone, hr.hrtwo {
 				<div style="padding: 10px;">제목 : ${reviewvo.review_title }</div>
 			</div>
 			<div id="uiddiv" style="padding: 10px;">
-				<div style="float: left;">이름 : ${reviewvo.member_id}</div>
+				<div style="float: left;">이름 : ${reviewvo.member_id} </div>
 				<div style="float: right;">등록 : ${reviewvo.review_date}</div>
 			</div>
 			<div>
@@ -95,11 +96,8 @@ hr.hrone, hr.hrtwo {
 			<div id="listbtdiv">
 				<button type="button" class="btn btn-default" onclick="toList()">List</button>
 			</div>
-
 			<hr class="hrone">
 			<!-- 선긋기 -->
-
-
 			<!-- 댓글작성1 -->
 			<div id="reply_write_wrap" class="reply_write_wrap">
 				<div id="reply_write_input" class="reply_write_input">
@@ -114,54 +112,76 @@ hr.hrone, hr.hrtwo {
 						onclick="insertReply(${reviewvo.no})">댓글 등록</button>
 				</div>
 			</div>
-
-			<hr class="hrtwo">
-			<!-- 선긋기 -->
-			<!-- 댓글1 -->
-			<div id="reply_list_wrap">
-				<c:forEach items="${ replylist }" var="replylist">
-					<c:if test="${ replylist.reply_reply == 'n' }">
-						<input type="hidden" class="" name="aa" value="${replylist.no}" />
-						<div class='div_re_uid' id='div_re_uid' name='div_re_uid'>
-							<div style="margin-bottm: 5px;">${replylist.user_id}|
-								${replylist.reply_date }
-								<button class='reply_write_submit_2 btn btn-info btn-xs'
-									name='reply_write_submit_2' id="reply_write_submit_2"
-									style="float: right; padding: 8px;">댓글</button>
-								<div>${replylist.reply_content}</div>
-							</div>
-						</div>
-						<hr class="hrone">
-					</c:if>
-					<!-- 댓글2뿌려주는부분 -->
-					<c:forEach items="${ replylist1 }" var="replylist1">
-						<c:if test="${ replylist1.reply_reply == 'y' }">
-							<c:if test="${ replylist.no == replylist1.reply_no }">
-								<div class="reply_list_wrap2" name="reply_list_wrap2">
-									<div style="width: 35px; float: left;">
-										<img
-											src="http://cfile204.uf.daum.net/R400x0/187AFA4750920BDD311E02"
-											style="width: 50px; height: 54px;"> <br />
-									</div>
-									<div style="margin-bottm: 5px; margin-left: 60px;">${replylist1.user_id}|
-										${replylist1.reply_date } <br />${replylist1.reply_content}
-									</div>
-									<hr class="hrone">
-									<div></div>
-								</div>
-							</c:if>
-						</c:if>
-					</c:forEach>
-					
-				</c:forEach>
+			<div id="reply_list" class="reply_list"></div>
 			</div>
 		</div>
 	</div>
 <script type="text/javascript">
-var review_no = ${reviewvo.no}
-function getReply(){
-	location.href="/detail/review_read/"+review_no
+var review_no = "${reviewvo.no}";
+var movie_id1 =  "${reviewvo.movie_id}";
+function toList() {
+	location.href="/detail/"+movie_id1;
 }
+getReplyList();
+function setReplyList(data, data1){
+	var result = "";  
+	var data_a = null;
+	var data_b = null;
+	$(data).each(function(){
+		data_a = this;
+			if(data_a.reply_reply == "n"){
+				result += "<div>"
+				+ "<div class='div_re_uid' id='div_re_uid' name='div_re_uid'>"
+				+ "<input type='hidden' name='aa' value='"+data_a.no+"'/>"
+				+ "<div style='margin-bottm: 5px;'>'"+data_a.user_id +"|"+ data_a.reply_date+"'</div>"
+				+ "<button class='reply_write_submit_2 btn btn-info btn-xs' name='reply_write_submit_2' id='reply_write_submit_2' style='float: right; padding: 8px;'>"+"댓글"+"</button>"
+				+ "<div>" + data_a.reply_content + "</div>"
+				+"<div>" + "<hr class='hrone'>" + "</div>"
+				+ "</div>";
+				
+				
+			}
+			$(data1).each(function(){
+				data_b = this;
+				if((data_b.reply_reply =="y" && data_a.no == data_b.reply_no)){
+				result += "<div class='reply_list_wrap2' name='reply_list_wrap2'>"
+				+ "<div style='width: 35px; float: left;'>"
+				+ "<img src='http://cfile204.uf.daum.net/R400x0/187AFA4750920BDD311E02'"
+				+ "style='width: 50px; height: 54px;'>" +"<br/>"
+				+ "</div>"
+				+ "<div style='margin-bottm: 5px; margin-left: 60px;'>"
+				+ data_b.user_id +"|" +data_b.reply_date
+				+ "<br/>"
+				+ data_b.reply_content
+				+ "</div>"
+				+"<div>" + "<hr class='hrone'>" + "</div>"
+				+ "</div>"
+			}
+	});	
+		});
+
+		result += "</div>";
+		
+		document.getElementById("reply_list").innerHTML = result;
+}
+
+function getReplyList(){
+	
+	$.ajax({
+		type : 'get',
+		url : '/detail/reply/' + review_no,
+		headers : {
+			"Content-Type" : "application/json",
+			//"X-HTTP-Method-Override" : "GET",  ----  POST 이거나 GET인경우는 생략가능
+		},
+		dataType : 'json',
+		data : '',
+		success : function(result){
+			setReplyList(result.replylist ,result.replylist1);
+		}
+	});
+}
+
 
 function insertReply(no) {
 	var review_no = $("#review_no").val();
@@ -187,7 +207,7 @@ function insertReply(no) {
 		dataType : 'text',
 		success : function(result) {
 			if (result == "SUCCESS") {
-				getReply();
+				getReplyList();
 			}
 		}
 	});
@@ -219,37 +239,31 @@ function insertReply2(no) {
 		dataType : 'text',
 		success : function(result) {
 			if (result == "SUCCESS") {
-				 getReply();
+				getReplyList();
 			}
 		}
 	});
 }
 
-function toList() {
-	history.back();
-}
-
-
-$(document).on(
-				"click",
-				"div#reply_list_wrap button",
-				function() {//동적으로 버튼이 생긴 경우 처리 방식
+$(document).on("click","div.div_re_uid button",function() {//동적으로 버튼이 생긴 경우 처리 방식
 					if ($(this).attr("name") == "reply_write_submit_2") {
 						//자기 부모의 tr을 알아낸다.
-						var parentElement = $(this).parent().parent();
-						var a = $(this).parent().parent().prev().val();
+						var parentElement = $(this).parent();
+						var a = $(this).prev().prev().val();
 						var no =  ${ reviewvo.no };
 						//댓글달기 창을 없앤다.
 						$("#commentEditor").remove();
 						//부모의 하단에 댓글달기 창을 삽입
+						alert(a);
 						var commentEditor = '<div id="commentEditor" class="reply_write_wrap">'
 							+ '<div class="reply_write_input">'
 							+ '<input type="hidden" id="reply_reply2" class="reply_reply2" name="reply_reply2" value="y"/>'
 							+ '<input type="hidden" id="reply_no" name="reply_no" value="'+a+'"/>'
 							+ '<input type="text" id="user_id2" name="user_id2" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10" style="width : 200px;"/>'
+							+ '<button id="reply_submit_2" class="reply_submit_2 btn btn-primary" onclick="insertReply2('+${ reviewvo.no }+')" style="margin-left:10px;">댓글 등록</button>'
 							+ '<textarea id="reply_content2" name="reply_content2" class="inputreply2 form-control col-lg-12" rows="4"></textarea>'
 							+ '<input type="hidden" id="review_no" name="review_no" value="' + ${ reviewvo.no } + '" />'
-							+ '<br/><br/><button id="reply_submit_2" class="reply_submit_2 btn btn-primary" onclick="insertReply2('+${ reviewvo.no }+')" style="float:right;">댓글 등록</button>'
+							+'<br/><br/>'
 							+ '</div>' + '</form>' + '</div>';
 					parentElement.after(commentEditor);
 				}
