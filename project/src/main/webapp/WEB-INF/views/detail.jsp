@@ -29,6 +29,9 @@
 			</span> 
 			<span class="label label-primary" style="padding-top: 12px; padding-bottom: 12px;"> 현재 상영중 </span>
 		</div>
+		<div >
+			<span style="margin-top:15px; margin-left:20px;"> 예매율 :</span>
+		</div>
 		<hr>
 		<b>	
 		<div>
@@ -53,19 +56,11 @@
 		<div>
 			<span style="margin-left: 20px; margin-bottom: 10px;"> 개봉일 : ${vo.open_date } </span>
 		</div>
-
 		<div>
 			<span style="margin-left: 20px; margin-bottom: 10px;"> 공식 사이트 : ${ vo.site } </span>
 		</div>
-
-		<div
-			style="margin-top: 10px; margin-left: 90px; margin-bottom: 45px; margin-top: 20px;">
-			<span class="label label-danger"
-				style="padding-top: 10px; padding-bottom: 10px; margin-left: 40px;">
-				<font size="4px;" color="white;"> 예매하러가기 </font> 
-			</span>
-		</div>
-		<div style="margin-left: 520px;">
+		<div style="margin-left: 430px;  margin-top: 40px">
+			<button type="button" class="btn btn-danger" onclick="SetFocus()">예매하러 가기</button>
 			<button type="button" class="btn btn-danger" onclick="SetFocus()">평점/후기</button>
 			<button type="button" class="btn btn-danger" onclick="">상영시간표</button>
 		</div>

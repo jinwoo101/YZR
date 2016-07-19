@@ -88,7 +88,7 @@ hr.hrone, hr.hrtwo {
 			<div>
 				<textarea
 					disabled readonly="readonly"
-				style="10px; padding: 10px; border: 0px;width: 1100px; height: 450px;
+				style="10px; padding: 10px; border: 0px;width: 950px; height: 450px;
 				  resize: none; margin-top: 20px; margin-left: 20px; background-color: white">  ${reviewvo.review_content }
 				</textarea>
 			</div>	
