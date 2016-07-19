@@ -30,6 +30,7 @@
 			<span class="label label-primary" style="padding-top: 12px; padding-bottom: 12px;"> 현재 상영중 </span>
 		</div>
 		<hr>
+		<b>	
 		<div>
 			<span style="margin-left: 20px; margin-bottom: 10px;"> <font
 				face="NanumBarunGothicBold">감독 :</font> <c:forEach
@@ -60,22 +61,23 @@
 		<div
 			style="margin-top: 10px; margin-left: 90px; margin-bottom: 45px; margin-top: 20px;">
 			<span class="label label-danger"
-				style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px;">예매하러가기 </span>
+				style="padding-top: 10px; padding-bottom: 10px; margin-left: 40px;">
+				<font size="4px;" color="white;"> 예매하러가기 </font> 
+			</span>
 		</div>
-		<div style="margin-left: 450px;">
+		<div style="margin-left: 520px;">
 			<button type="button" class="btn btn-danger" onclick="SetFocus()">평점/후기</button>
 			<button type="button" class="btn btn-danger" onclick="">상영시간표</button>
 		</div>
-		<div>
-			<textarea readonly="readonly"
-				style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; 
-				border-top-left-radius: 10px; border-top-right-radius: 10px; padding: 10px;
-				 border: 1px solid gray; width: 1100px; height: 450px;
-				  resize: none; margin-top: 20px; margin-left: 20px;">  ${vo.story }
+		</b>
+		<hr style="margin-left:30px; border: 1; border-top: 1px solid black; margin-top : 30px;">
+			<textarea type="text" disabled readonly="readonly"
+				style="10px; padding: 10px; border: 0px;width: 1100px; height: 450px;
+				  resize: none; margin-top: 20px; margin-left: 20px; background-color: white">  ${vo.story }
 			</textarea>
 		</div>
 		<div>
-			<table class="table" id="gpatable">
+			<table class="table" id="gpatable" style="board:0px solid white">
 				<tr>
 					<td>
 						<div id="container1" style="width: 420px; height: 300px;"></div>
@@ -98,14 +100,14 @@
 				onclick="review_write('${vo.movie_id}')">후기작성</button>
 		</div>
 		<h1>게시글 목록</h1>
-		<table class="table table-striped">
+		<table class="table table-striped" >
 			<thead>
 				<tr class="danger">
-					<th>no</th>
-					<th>title</th>
-					<th>username</th>					
-					<th>regdate</th>
-					<th>view_cnt</th>
+					<th style="text-align: center; width:50px;">번호</th>
+					<th style="text-align: center; width:500px;">제목</th>
+					<th style="text-align: center; width:200px;">이름</th>					
+					<th style="text-align: center;">등록날짜</th>
+					<th style="text-align: center;">조회수</th>
 				<tr>	
 			</thead>
 			<tbody id="reviw_table">
@@ -431,19 +433,19 @@ function setReviewList(data){
 	var result = "<tr>";
 	
 	$(data).each(function(){
-		result += "<td>" 
+		result += "<td style='text-align: center;''>" 
 		+this.no
 		+"</td>"
-		+"<td>"
-		+"<a href='javascript:review_read("+this.no+")'>"+this.review_title+"</a>"
+		+"<td  style='text-align: center;'>"
+		+"<a href='javascript:review_read("+this.no+")'style='text-decoration:none;'>"+this.review_title+"</a>"
 		+"</td>"
-		+"<td>"
+		+"<td  style='text-align: center;'>"
 		+this.member_id
 		+"</td>"		
-		+"<td>"
+		+"<td  style='text-align: center;'>"
 		+this.review_date
 		+"</td>"
-		+"<td>"
+		+"<td  style='text-align: center;'>"
 		+this.review_cnt
 		+"</td>"
 		+"</tr>"

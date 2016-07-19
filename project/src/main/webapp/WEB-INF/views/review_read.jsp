@@ -37,7 +37,7 @@ hr.hrone, hr.hrtwo {
 }
 
 #reply_write_wrap {
-	height: 160px;
+	height: 180px;
 	background-color: #F5F6F9;
 	margin-bottom: 30px;
 }
@@ -87,10 +87,9 @@ hr.hrone, hr.hrtwo {
 			</div>
 			<div>
 				<textarea
-					style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; 
-					border-top-left-radius: 10px; border-top-right-radius: 10px; padding: 10px;
-					 border: 1px solid gray; width: 1000px; height: 500px;
-					  resize: none; margin-top: 20px; margin-left: 0px;">  ${reviewvo.review_content }
+					disabled readonly="readonly"
+				style="10px; padding: 10px; border: 0px;width: 1100px; height: 450px;
+				  resize: none; margin-top: 20px; margin-left: 20px; background-color: white">  ${reviewvo.review_content }
 				</textarea>
 			</div>	
 			<div id="listbtdiv">
