@@ -247,12 +247,12 @@ function setReplyList(data, data1){
 				+ "<img src='http://cfile204.uf.daum.net/R400x0/187AFA4750920BDD311E02'"
 				+ "style='width: 50px; height: 54px;'>" +"<br/>"
 				+ "</div>"
-				+ "<div style='margin-bottm: 5px; margin-left: 60px;'>"
-				+ data_b.user_id +"|" +data_b.reply_date
-				+ "<br/>"
-				+ data_b.reply_content
-				+ "</div>"
-				+"<button class='btn btn-info btn-xs' onclick='delete_reply("+data_b.no+")'; padding: 8px;'>"+"삭제"+"</button>"
+				+"<div style='margin-left:30px;'>"
+				+"<b><span style='margin-left:20px;'> 아이디 : "+ data_b.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ data_b.reply_date+"</span></b></div>"
+				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ data_b.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
+				+"<div><textarea disabled readonly='readonly' style='10px; padding: 10px; border: 0px;width: 840px; height: 100px; font-size:18px;"
+				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + data_a.reply_content
+				+"</textarea></div></div>" 
 				+"<div>" + "<hr class='hrone'>" + "</div>"
 				+ "</div>"
 			}
