@@ -19,18 +19,25 @@ public class ReplyVO {
 	@SequenceGenerator(name="NoSequence", sequenceName="REPLY_NO_SEQ", allocationSize=1)
 	@Column(name="no")
 	int no;
+	
 	@Column(name="reply_no")
 	int reply_no;	
+	
 	@Column(name="user_id")
 	String user_id;
+	
 	@Column(name="reply_content")
 	String reply_content;
+	
 	@Column(name="reply_date")
 	String reply_date;
+	
 	@Column(name="reply_reply")
 	String reply_reply;
+	
 	@Column(name="review_no")
 	int review_no;
+	
 	public int getNo() {
 		return no;
 	}

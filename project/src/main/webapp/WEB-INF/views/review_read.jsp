@@ -78,23 +78,23 @@ hr.hrone, hr.hrtwo {
 				<h2>후기</h2>
 			</div>
 			<!-- 제목 작성자 날짜 -->
-			<div id="titlediv">
-				<div style="padding: 10px;">제목 : ${reviewvo.review_title }</div>
+			<div id="titlediv" style="padding: 10px;">
+				제목 : ${reviewvo.review_title }
 			</div>
-			<div id="uiddiv" style="padding: 10px;">
-				<div style="float: left;">이름 : ${reviewvo.member_id} </div>
-				<div style="float: right;">등록 : ${reviewvo.review_date}</div>
+			<div style="padding: 10px;">
+				<div id="member_id" style="float: left;"> ${reviewvo.member_id} </div>
+				<div id="review_date" style="float: right; font-size: 5pt;">등록 : ${reviewvo.review_date}</div>
 			</div>
-			<div>
-				<textarea
-					disabled readonly="readonly"
-				style="10px; padding: 10px; border: 0px;width: 950px; height: 450px;
-				  resize: none; margin-top: 20px; margin-left: 20px; background-color: white">  ${reviewvo.review_content }
-				</textarea>
+			<div style="width: 950px; height: 450px; margin-top: 20px; margin-left: 20px;">
+				 ${reviewvo.review_content }
 			</div>	
 			<div id="listbtdiv">
-				<button type="button" class="btn btn-default" onclick="toList()">List</button>
+				<button type="button" class="btn btn-danger" onclick="eidt_review()">수정</button>
+				<button type="button" class="btn btn-danger" onclick="toList()">목록</button>
+				<button type="button" class="btn btn-danger" onclick="delete_review()">삭제</button>
+				
 			</div>
+			
 			<hr class="hrone">
 			<!-- 선긋기 -->
 			<!-- 댓글작성1 -->
@@ -116,11 +116,82 @@ hr.hrone, hr.hrtwo {
 		</div>
 	</div>
 <script type="text/javascript">
+
+
 var review_no = "${reviewvo.no}";
-var movie_id1 =  "${reviewvo.movie_id}";
-function toList() {
-	location.href="/detail/"+movie_id1;
+var movie_id =  "${reviewvo.movie_id}";
+var review_title ="${reviewvo.review_title}";
+var review_content = "${reviewvo.review_content}";
+var member_id = "${reviewvo.member_id}";
+
+
+function delete_review(){
+	$.ajax({
+		type : 'delete',
+		url : '/detail/review_read/review_delete/' + review_no ,
+		headers : { 
+			"Content-Type" : "application/json"
+			},
+		data : '',
+		dataType : 'text',
+		success : function(result){
+			location.href="/detail/"+movie_id;
+		}
+	});
 }
+
+
+function eidt_review(){
+	var frm1 = document.createElement("form");
+	frm1.setAttribute("id", "frm1");
+	frm1.setAttribute("action", "/review_update_read/"+review_no);
+	frm1.setAttribute("method", "post");
+
+	var a = document.createElement("INPUT")
+	a.setAttribute("type", "hidden");
+	a.setAttribute("name", "no");
+	a.setAttribute("id", "no");
+	a.setAttribute("value", review_no);
+	frm1.appendChild(a);
+		
+	var b = document.createElement("INPUT")
+	b.setAttribute("type", "hidden");;
+	b.setAttribute("name","movie_id")
+	b.setAttribute("id", "movie_id");
+	b.setAttribute("value", movie_id);
+	frm1.appendChild(b);
+	
+	var c = document.createElement("INPUT")
+	c.setAttribute("type", "hidden");
+	c.setAttribute("name","review_title");
+	c.setAttribute("id", "review_title");
+	c.setAttribute("value", review_title);
+	frm1.appendChild(c);
+	
+	var d = document.createElement("INPUT")
+	d.setAttribute("type", "hidden");
+	d.setAttribute("name","review_content");
+	d.setAttribute("id", "review_content");
+	d.setAttribute("value", review_content);
+	frm1.appendChild(d);
+	
+	var e = document.createElement("INPUT")
+	e.setAttribute("type", "hidden");
+	e.setAttribute("name","member_id")
+	e.setAttribute("id", "member_id");
+	e.setAttribute("value", member_id);
+	frm1.appendChild(e);
+		
+	document.body.appendChild(frm1);
+	frm1.submit();
+}	
+
+
+
+function toList() {
+	location.href="/detail/"+movie_id;
+}
+
 getReplyList();
 function setReplyList(data, data1){
 	var result = "";  
@@ -132,13 +203,12 @@ function setReplyList(data, data1){
 				result += "<div>"
 				+ "<div class='div_re_uid' id='div_re_uid' name='div_re_uid'>"
 				+ "<input type='hidden' name='aa' value='"+data_a.no+"'/>"
-				+ "<div style='margin-bottm: 5px;'>'"+data_a.user_id +"|"+ data_a.reply_date+"'</div>"
+				+ "<div style='margin-bottm: 5px; margin-left:20px;'>"+data_a.user_id +"|"+ data_a.reply_date+"</div>"
 				+ "<button class='reply_write_submit_2 btn btn-info btn-xs' name='reply_write_submit_2' id='reply_write_submit_2' style='float: right; padding: 8px;'>"+"댓글"+"</button>"
+				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+data_a.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
 				+ "<div>" + data_a.reply_content + "</div>"
 				+"<div>" + "<hr class='hrone'>" + "</div>"
 				+ "</div>";
-				
-				
 			}
 			$(data1).each(function(){
 				data_b = this;
@@ -153,15 +223,31 @@ function setReplyList(data, data1){
 				+ "<br/>"
 				+ data_b.reply_content
 				+ "</div>"
+				+"<button class='btn btn-info btn-xs' onclick='delete_reply("+data_b.no+")'; padding: 8px;'>"+"삭제"+"</button>"
 				+"<div>" + "<hr class='hrone'>" + "</div>"
 				+ "</div>"
 			}
 	});	
-		});
+});
+	result += "</div>";
+	document.getElementById("reply_list").innerHTML = result;
+}
 
-		result += "</div>";
-		
-		document.getElementById("reply_list").innerHTML = result;
+
+function delete_reply(re_no){
+	$.ajax({
+		type : 'delete',
+		url : '/detail/review_read/reply_delete/' + re_no ,
+		headers : { 
+			"Content-Type" : "application/json"
+			},
+		data : '',
+		dataType : 'json',
+		success : function(result){
+			getReplyList();
+		}
+	});
+	
 }
 
 function getReplyList(){
@@ -182,6 +268,7 @@ function getReplyList(){
 }
 
 
+	
 function insertReply(no) {
 	var review_no = $("#review_no").val();
 	var reply_reply = $("#reply_reply").val();

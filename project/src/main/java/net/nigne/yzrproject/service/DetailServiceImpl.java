@@ -139,4 +139,29 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		dao.Reviewcnt_Update(no, review_cnt);
 	}
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public void Review_update(int no, String review_title, String review_content) throws Exception {
+		dao.Review_update(no, review_title, review_content);
+		
+	}
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public void delete_review(int review_no) {
+		// TODO Auto-generated method stub
+		dao.delete_review(review_no);
+	}
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public ReplyVO getReply_no(int no) {
+		// TODO Auto-generated method stub
+		return dao.getReply_no(no);
+	}
+	
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public void delete_reply(int no) {
+		// TODO Auto-generated method stub
+		dao.delete_reply(no);
+	}
 }

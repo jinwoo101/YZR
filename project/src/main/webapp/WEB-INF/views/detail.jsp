@@ -25,9 +25,9 @@
 		</div>
 		<div style="margin-left: 30px;margin-top: 40px;">
 			<span style=" margin-left: 20px; margin-top: 10px;"> 
-				<font size="5px"> ${vo.title }</font>
+				<font size="6px"> ${vo.title }</font>
 			</span> 
-			<span class="label label-primary" style="padding-top: 12px; padding-bottom: 12px;"> 현재 상영중 </span>
+			<span class="label label-primary" style="padding-top: 15px; padding-bottom: 13px;">  현재 상영중  </span>
 		</div>
 		<div >
 			<span style="margin-top:15px; margin-left:20px;"> 예매율 :</span>
@@ -59,17 +59,16 @@
 		<div>
 			<span style="margin-left: 20px; margin-bottom: 10px;"> 공식 사이트 : ${ vo.site } </span>
 		</div>
-		<div style="margin-left: 430px;  margin-top: 40px">
+		<div style="margin-left: 430px;  margin-top: 40px;" >
 			<button type="button" class="btn btn-danger" onclick="SetFocus()">예매하러 가기</button>
 			<button type="button" class="btn btn-danger" onclick="SetFocus()">평점/후기</button>
 			<button type="button" class="btn btn-danger" onclick="">상영시간표</button>
 		</div>
 		</b>
-		<hr style="margin-left:30px; border: 1; border-top: 1px solid black; margin-top : 30px;">
-			<textarea type="text" disabled readonly="readonly"
-				style="10px; padding: 10px; border: 0px;width: 1100px; height: 450px;
-				  resize: none; margin-top: 20px; margin-left: 20px; background-color: white">  ${vo.story }
-			</textarea>
+		<hr style="margin-left:40px; border: 1; border-top: 1px solid black; margin-top : 40px;">
+			<div style="width: 1100px; height: 450px; margin-top: 20px; margin-left: 20px;">
+				${vo.story }
+			</div>
 		</div>
 		<div>
 			<table class="table" id="gpatable" style="board:0px solid white">

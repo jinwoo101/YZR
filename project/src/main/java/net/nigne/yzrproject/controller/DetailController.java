@@ -94,12 +94,9 @@ public class DetailController {
 		try {
 			GpaVO vo = service.getgpa(movie_id);
 			entity = new ResponseEntity<>(vo, HttpStatus.OK);
-			System.out.println("5555555555555555");
 		} catch (Exception e) {
-			System.out.println("6666666");
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		System.out.println("7777777777777755");
 		return entity;
 	}
 	
@@ -114,12 +111,9 @@ public class DetailController {
 					vo.getMale(), vo.getFemale(), vo.getTeenager(), vo.getTwenties(), vo.getThirties(),
 					vo.getForties());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-			System.out.println("�뜝�럥�빢�뜝�럩�젧");
 		} catch (Exception e) {
-			System.out.println("�뜝�럥�빢�뜝�럩�젧�뜝�럩沅롳옙紐닷뜝占�");
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		System.out.println("�뜝�럥�빢�뜝�럩�젧..");
 		return entity;
 	}
 	
@@ -137,12 +131,9 @@ public class DetailController {
 		try {
 			service.reviewInsert(vo.getMember_id(), movie_id , vo.getReview_title(), vo.getReview_content(),vo.getReview_date(),vo.getReview_cnt(),vo.getReview_file(), vo.getReview_like());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-			System.out.println("555555555555");
 		} catch (Exception e) {
-			System.out.println("6666666");
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		System.out.println("�뜝�럩肉��뜝�럩�졑");
 		return entity;
 	}
 	
@@ -152,12 +143,9 @@ public class DetailController {
 		try {
 			service.replyinsert(vo.getReply_no(),vo.getReview_no(), vo.getUser_id(), vo.getReply_content(), vo.getReply_date(), vo.getReply_reply());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-			System.out.println("댓글");
 		} catch (Exception e) {
-			System.out.println("댓글실패");
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		System.out.println("�뜝�럩肉��뜝ㅋㅋ럩�졑");
 		return entity;
 	}
 	
@@ -167,12 +155,9 @@ public class DetailController {
 		try {
 			service.reply_reply_insert(vo.getReply_no(),vo.getReview_no(), vo.getUser_id(), vo.getReply_content(), vo.getReply_date(), vo.getReply_reply());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-			System.out.println("대댓글");
 		} catch (Exception e) {
-			System.out.println("댓글실패");
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		System.out.println("�뜝�럩肉��뜝ㅋㅋ럩�졑");
 		return entity;
 	}		
 	
@@ -182,25 +167,61 @@ public class DetailController {
 			@PathVariable("page") Integer page   ) {
 		ResponseEntity<Map<String, Object>> entity = null;
 		try{
-			// ������ ó���� ���� Criteria ����
 			Criteria criteria = new Criteria();
 			criteria.setPage(page);
-			// ��� ���� ��������
 			long replyTotal = service.getTotalCount(movie_id);
-			// ��� ��������
 			List<ReviewVO> list = service.getListPage(movie_id, criteria);
-			// ������ ����Ŀ�� �� ��� ������, ������������ �ִ� Criteria �� �Ѱܼ�
-			// ����¡ ���� ����Ѵ�
 			PageMaker pm = new PageMaker(criteria, replyTotal);
-			// ���������� Map �� ��� ��ϰ� ����¡ ó�� ���� ��Ƽ� 
 			Map<String, Object> map = new HashMap<>();
 			map.put("l", list);
 			map.put("p", pm);
-			// �������� �����Ѵ�
 			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		}catch(Exception e){
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
 		}
 		return entity;
 	}
+	
+	@RequestMapping(value = "/review_update_read/{review_no}", method = RequestMethod.POST)
+	public String review_update_read(@PathVariable("review_no") int review_no, Model model) {
+		ReviewVO reviewvo = service.getReview_read(review_no);
+		model.addAttribute("reviewvo",reviewvo);
+		return "review_update";
+	}
+	
+	@RequestMapping(value = "/review/update/{no}", method = RequestMethod.PUT)
+	public ResponseEntity<String> update_review(@PathVariable("no") int no, @RequestBody ReviewVO vo) {
+		ResponseEntity<String> entity = null;
+		try {
+			service.Review_update(no, vo.getReview_title(), vo.getReview_content());
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	@RequestMapping(value = "detail/review_read/review_delete/{review_no}", method = RequestMethod.DELETE) 
+	public ResponseEntity<String> deleteReview(@PathVariable("review_no") Integer review_no) throws Exception{ 
+		ResponseEntity<String> entity = null; 
+		try{ 
+			service.delete_review(review_no);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
+		}catch(Exception e){ 
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
+		} 
+		return entity; 
+	} 
+	@RequestMapping(value = "detail/review_read/reply_delete/{reply_no}", method = RequestMethod.DELETE) 
+	public ResponseEntity<String> deleteReply(@PathVariable("reply_no") Integer reply_no) throws Exception{ 
+		ResponseEntity<String> entity = null; 
+		try{ 
+			service.delete_review(reply_no);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
+		}catch(Exception e){ 
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
+		} 
+		return entity; 
+	} 
+
+	
 }
