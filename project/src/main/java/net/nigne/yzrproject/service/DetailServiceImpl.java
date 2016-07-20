@@ -151,12 +151,6 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		dao.delete_review(review_no);
 	}
-	@Transactional(rollbackFor = { Exception.class })
-	@Override
-	public ReplyVO getReply_no(int no) {
-		// TODO Auto-generated method stub
-		return dao.getReply_no(no);
-	}
 	
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
@@ -164,4 +158,12 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		dao.delete_reply(no);
 	}
+	
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public void delete_review_reply(int review_no) {
+		// TODO Auto-generated method stub
+		 dao.delete_review_reply(review_no);
+	}
+	
 }

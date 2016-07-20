@@ -200,22 +200,38 @@ public class DetailController {
 		}
 		return entity;
 	}
+	
 	@RequestMapping(value = "detail/review_read/review_delete/{review_no}", method = RequestMethod.DELETE) 
 	public ResponseEntity<String> deleteReview(@PathVariable("review_no") Integer review_no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
 			service.delete_review(review_no);
+			service.delete_review_reply(review_no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
 		} 
 		return entity; 
 	} 
-	@RequestMapping(value = "detail/review_read/reply_delete/{reply_no}", method = RequestMethod.DELETE) 
-	public ResponseEntity<String> deleteReply(@PathVariable("reply_no") Integer reply_no) throws Exception{ 
+	@RequestMapping(value = "detail/review_read/review_reply_delete/{review_no}", method = RequestMethod.DELETE) 
+	public ResponseEntity<String> deleteReview_reply(@PathVariable("review_no") Integer review_no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
-			service.delete_review(reply_no);
+			service.delete_review_reply(review_no);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
+		}catch(Exception e){ 
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
+		} 
+		return entity; 
+	} 
+	
+	
+	
+	@RequestMapping(value = "detail/review_read/reply_delete/{no}", method = RequestMethod.DELETE) 
+	public ResponseEntity<String> deleteReply(@PathVariable("no") Integer no) throws Exception{ 
+		ResponseEntity<String> entity = null; 
+		try{ 
+			service.delete_reply(no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 

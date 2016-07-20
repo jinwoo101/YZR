@@ -32,7 +32,6 @@ public interface DetailDAO {
 	public void Review_update(int no,String review_title, String review_content) throws Exception;
 	public long getTotalCount(String movie_id);
 	public List<ReviewVO> getListPage(String movie_id, Criteria criteria);
-	public void delete_review(int review_no);
 
 	public void replyinsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
 	public void reply_reply_insert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
@@ -40,8 +39,13 @@ public interface DetailDAO {
 	public List<ReplyVO> getreply_reply(int review_no);
 	public long getReplyCount(int review_no);
 	public List<ReplyVO> getreplyPage(int review_no, Criteria criteria);
-	public ReplyVO getReply_no(int no);
+
+	
+	
 	public void delete_reply(int no);
+	public void delete_review_reply(int review_no);
+	public void delete_review(int review_no);
+
 
 	
 

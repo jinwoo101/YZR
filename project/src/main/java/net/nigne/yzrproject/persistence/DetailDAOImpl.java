@@ -305,28 +305,36 @@ public class DetailDAOImpl implements DetailDAO {
 		// TODO Auto-generated method stub
 		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_read(no).getNo());
 		entityManager.remove(vo);
+		
 	}
 
+	
+	@Override
+	public void delete_review_reply(int review_no) {
+		// TODO Auto-generated method stub
+		ReplyVO vo = entityManager.find(ReplyVO.class, review_no);
+		entityManager.remove(vo);
+	}
+	
+	
+	
+	
+	
+	
 	@Override
 	public void delete_reply(int no) {
 		// TODO Auto-generated method stub
 		ReplyVO vo = entityManager.find(ReplyVO.class, no);
-		System.out.println("aaa");
 		entityManager.remove(vo);
 	}
-
-	@Override
-	public ReplyVO getReply_no(int no) {
-		// TODO Auto-generated method stub
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<ReplyVO> cq = cb.createQuery(ReplyVO.class);
-		Root<ReplyVO> root = cq.from(ReplyVO.class);
-		Predicate p = cb.equal(root.get("no"), no);
-		cq.select(root).where(p);
-		TypedQuery<ReplyVO> tq = entityManager.createQuery(cq);
-		ReplyVO vo = tq.getSingleResult();
-		return vo;
-	}
+	
+//	@Override ½ÇÆÐ..
+//	public void delete_review_reply(int review_no) {
+//		// TODO Auto-generated method stub
+//		List<ReplyVO> replylist = entityManager.createQuery("select review_no from ReplyVO review_no",ReplyVO.class).getResultList();		
+//		entityManager.remove(replylist);
+//	}
+//	
 
 
 }

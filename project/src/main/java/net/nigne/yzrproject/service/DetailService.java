@@ -36,7 +36,9 @@ public interface DetailService {
 	public void replyinsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
 	public void reply_reply_insert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
 	public void delete_review(int review_no);
-	public ReplyVO getReply_no(int no);
+	
 	public void delete_reply(int no);
+	
+	public void delete_review_reply(int review_no);
 
 }

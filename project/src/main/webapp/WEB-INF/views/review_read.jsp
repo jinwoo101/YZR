@@ -81,11 +81,11 @@ hr.hrone, hr.hrtwo {
 			<div id="titlediv" style="padding: 10px;">
 				제목 : ${reviewvo.review_title }
 			</div>
-			<div style="padding: 10px;">
-				<div id="member_id" style="float: left;"> ${reviewvo.member_id} </div>
-				<div id="review_date" style="float: right; font-size: 5pt;">등록 : ${reviewvo.review_date}</div>
+			<div style="padding: 10px; margin-bottom: 30px;">
+				<div id="member_id" style="float: left;">아이디 : ${reviewvo.member_id} </div>
+				<div id="review_date" style="float: right; ">등록 : ${reviewvo.review_date}</div>
 			</div>
-			<div style="width: 950px; height: 450px; margin-top: 20px; margin-left: 20px;">
+			<div style="width: 950px; height: 450px; margin-top: 20px; margin-left: 20px; border: 1px solid black">
 				 ${reviewvo.review_content }
 			</div>	
 			<div id="listbtdiv">
@@ -94,7 +94,6 @@ hr.hrone, hr.hrtwo {
 				<button type="button" class="btn btn-danger" onclick="delete_review()">삭제</button>
 				
 			</div>
-			
 			<hr class="hrone">
 			<!-- 선긋기 -->
 			<!-- 댓글작성1 -->
@@ -116,8 +115,6 @@ hr.hrone, hr.hrtwo {
 		</div>
 	</div>
 <script type="text/javascript">
-
-
 var review_no = "${reviewvo.no}";
 var movie_id =  "${reviewvo.movie_id}";
 var review_title ="${reviewvo.review_title}";
@@ -135,11 +132,39 @@ function delete_review(){
 		data : '',
 		dataType : 'text',
 		success : function(result){
-			location.href="/detail/"+movie_id;
+			 delete_review_reply()
 		}
 	});
 }
 
+function delete_reply(r_no){
+	$.ajax({
+		type : 'delete',
+		url : '/detail/review_read/reply_delete/' + r_no ,
+		headers : { 
+			"Content-Type" : "application/json"
+			},
+		data : '',
+		dataType : 'text',
+		success : function(result){
+			location.href="/detail/review_read/"+review_no;
+		}
+	});
+}
+function delete_review_reply(){
+	$.ajax({
+		type : 'delete',
+		url : '/detail/review_read/review_reply_delete/' + review_no ,
+		headers : { 
+			"Content-Type" : "application/json"
+			},
+		data : '',
+		dataType : 'text',
+		success : function(result){
+			location.href="/detail/review_read/"+review_no;
+		}
+	});
+}
 
 function eidt_review(){
 	var frm1 = document.createElement("form");
@@ -203,13 +228,17 @@ function setReplyList(data, data1){
 				result += "<div>"
 				+ "<div class='div_re_uid' id='div_re_uid' name='div_re_uid'>"
 				+ "<input type='hidden' name='aa' value='"+data_a.no+"'/>"
-				+ "<div style='margin-bottm: 5px; margin-left:20px;'>"+data_a.user_id +"|"+ data_a.reply_date+"</div>"
+				+ "<div style='margin-bottm: 5px; margin-left:20px; font-size:15px'>"
+				+"<b><span> 아이디 : "+ data_a.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ data_a.reply_date+"</span></b></div>"
+				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ data_a.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
 				+ "<button class='reply_write_submit_2 btn btn-info btn-xs' name='reply_write_submit_2' id='reply_write_submit_2' style='float: right; padding: 8px;'>"+"댓글"+"</button>"
-				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+data_a.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
-				+ "<div>" + data_a.reply_content + "</div>"
+				+"<div><textarea disabled readonly='readonly' style='10px; padding: 10px; border: 0px;width: 840px; height: 100px; font-size:18px;"
+				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + data_a.reply_content
+				+"</textarea></div>" 
 				+"<div>" + "<hr class='hrone'>" + "</div>"
 				+ "</div>";
 			}
+			
 			$(data1).each(function(){
 				data_b = this;
 				if((data_b.reply_reply =="y" && data_a.no == data_b.reply_no)){
@@ -233,22 +262,6 @@ function setReplyList(data, data1){
 	document.getElementById("reply_list").innerHTML = result;
 }
 
-
-function delete_reply(re_no){
-	$.ajax({
-		type : 'delete',
-		url : '/detail/review_read/reply_delete/' + re_no ,
-		headers : { 
-			"Content-Type" : "application/json"
-			},
-		data : '',
-		dataType : 'json',
-		success : function(result){
-			getReplyList();
-		}
-	});
-	
-}
 
 function getReplyList(){
 	
@@ -335,7 +348,7 @@ $(document).on("click","div.div_re_uid button",function() {//동적으로 버튼
 					if ($(this).attr("name") == "reply_write_submit_2") {
 						//자기 부모의 tr을 알아낸다.
 						var parentElement = $(this).parent();
-						var a = $(this).prev().prev().val();
+						var a = $(this).prev().prev().prev().val();
 						var no =  ${ reviewvo.no };
 						//댓글달기 창을 없앤다.
 						$("#commentEditor").remove();
