@@ -20,12 +20,12 @@
 			<hr style="border: solid 1px black; margin: 0 auto;">
 		</div>
 		<div>
-			<img src="${vo.poster}"
+			<img src="${movievo.poster}"
 				alt="CGV" style="float: left; height: 280px; width: 200px; margin-left: 30px; margin-top: 40px;">
 		</div>
 		<div style="margin-left: 30px;margin-top: 40px;">
 			<span style=" margin-left: 20px; margin-top: 10px;"> 
-				<font size="6px"> ${vo.title }</font>
+				<font size="6px"> ${movievo.title }</font>
 			</span> 
 			<span class="label label-primary" style="padding-top: 15px; padding-bottom: 13px;">  현재 상영중  </span>
 		</div>
@@ -54,10 +54,10 @@
 			</span>
 		</div>
 		<div>
-			<span style="margin-left: 20px; margin-bottom: 10px;"> 개봉일 : ${vo.open_date } </span>
+			<span style="margin-left: 20px; margin-bottom: 10px;"> 개봉일 : ${movievo.open_date } </span>
 		</div>
 		<div>
-			<span style="margin-left: 20px; margin-bottom: 10px;"> 공식 사이트 : ${ vo.site } </span>
+			<span style="margin-left: 20px; margin-bottom: 10px;"> 공식 사이트 : ${movievo.site } </span>
 		</div>
 		<div style="margin-left: 430px;  margin-top: 40px;" >
 			<button type="button" class="btn btn-danger" onclick="SetFocus()">예매하러 가기</button>
@@ -67,7 +67,7 @@
 		</b>
 		<hr style="margin-left:40px; border: 1; border-top: 1px solid black; margin-top : 40px;">
 			<div style="width: 1100px; height: 450px; margin-top: 20px; margin-left: 20px;">
-				${vo.story }
+				${movievo.story }
 			</div>
 		</div>
 		<div>
@@ -91,7 +91,7 @@
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 				data-target="#myModal">평점</button>
 			<button type="button" class="btn btn-info btn-lg"
-				onclick="review_write('${vo.movie_id}')">후기작성</button>
+				onclick="review_write('${movievo.movie_id}')">후기작성</button>
 		</div>
 		<h1>게시글 목록</h1>
 		<table class="table table-striped" >
@@ -202,7 +202,7 @@
 <script>
 
 function review_read(no) {
-	location.href = "/detail/review_read/" + no;
+	location.href = "/movie/review_read/" + no;
 	
 }
 function review_write(id) {
@@ -223,7 +223,7 @@ function updategpa() {
 	var forties = $(".forties:checked").val();
 	$.ajax({
 		type : 'post',
-		url : '/detail/chart/${movie_id}',
+		url : '/movie/chart/${movie_id}',
 		headers : {
 			"Content-Type" : "application/json",
 		//"X-HTTP-Method-Override" : "PUT"
@@ -252,7 +252,7 @@ function updategpa() {
 function getList() {
 		$.ajax({
 		type : 'get',
-		url : '/detail/chart/${movie_id}',
+		url : '/movie/chart/${movie_id}',
 		headers : {
 			"Content-Type" : "application/json",
 		//"X-HTTP-Method-Override" : "GET",  ----  POST 이거나 GET인경우는 생략가능
@@ -453,7 +453,7 @@ function getReviewList(page){
 
 	$.ajax({
 		type : 'get',
-		url : '/detail/${vo.movie_id}/' + page,
+		url : '/movie/${movievo.movie_id}/' + page,
 		headers : {
 			"Content-Type" : "application/json",
 			//"X-HTTP-Method-Override" : "GET",  ----  POST 이거나 GET인경우는 생략가능

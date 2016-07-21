@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="./include/header.jsp"%>
 <script type="text/javascript" src="/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/./resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" type="text/javascript" charset="utf-8"></script>
 <div id="wrap_content" style="min-height: 100%; position: relative;">
+	
 	<div id="content" style="padding-bottom: 150px;">
 		<h2>리뷰 작성</h2>
 			<div style="margin-left:140px;">
@@ -28,15 +29,18 @@
 var movie_id = '${movie_id}';
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
-    oAppRef: oEditors,
+	 oAppRef: oEditors,
     elPlaceHolder: "review_content",
     sSkinURI: "/resources/se2/SmartEditor2Skin.html",
     fCreator: "createSEditor2",
 });
-//textArea에 이미지 첨부
-function pasteHTML(filepath) {
-	var sHTML = '<span style="color:#FF0000;"<img src="'+filepath+'"></span>';
-	oEditors.getById["review_content"].exec("PASTE_HTML", [ sHTML ]);
+
+function pasteHTML(filename){
+
+	var sHTML = '<img src="E:/git/YZR/project/resources/image/'+filename+'">';
+
+	oEditors.getById["review_content"].exec("PASTE_HTML", [sHTML]); 
+
 }
 
 
@@ -60,7 +64,7 @@ function insertReview() {
 		dataType : 'text',
 		success : function(result) {
 			if (result == "SUCCESS") {
-				location.href="/detail/"+movie_id
+				location.href="/movie/"+movie_id
 			}
 		}
 	});

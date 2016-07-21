@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="movie")
-public class DetailVO {
+public class MovieVO {
 	@Id
 	@Column(name="movie_id")
 	String movie_id;

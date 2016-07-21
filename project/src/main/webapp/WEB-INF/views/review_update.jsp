@@ -109,7 +109,7 @@ nhn.husky.EZCreator.createInIFrame({
 });
 
 function toList() {
-	location.href="/detail/"+movie_id1;
+	location.href="/movie/"+movie_id1;
 }
 
 function updateReview() {
@@ -131,7 +131,7 @@ function updateReview() {
 		dataType : 'text',
 		success : function(result) {
 			if (result == "SUCCESS") {
-				location.href="/detail/review_read/"+no
+				location.href="/movie/review_read/"+no
 			}
 		}
 	});

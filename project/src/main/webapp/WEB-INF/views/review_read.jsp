@@ -111,7 +111,7 @@ hr.hrone, hr.hrtwo {
 				</div>
 			</div>
 			<hr class="hrone">
-			<div id="reply_list" class="reply_list"></div>
+			<div id="reply" class="reply"></div>
 			</div>
 		</div>
 	</div>
@@ -126,7 +126,7 @@ var member_id = "${reviewvo.member_id}";
 function delete_review(){
 	$.ajax({
 		type : 'delete',
-		url : '/detail/review_read/review_delete/' + review_no ,
+		url : '/movie/review_delete/' + review_no ,
 		headers : { 
 			"Content-Type" : "application/json"
 			},
@@ -141,28 +141,28 @@ function delete_review(){
 function delete_reply(r_no){
 	$.ajax({
 		type : 'delete',
-		url : '/detail/review_read/reply_delete/' + r_no ,
+		url : '/movie/reply_delete/' + r_no ,
 		headers : { 
 			"Content-Type" : "application/json"
 			},
 		data : '',
 		dataType : 'text',
 		success : function(result){
-			location.href="/detail/review_read/"+review_no;
+			location.href="/movie/review_read/"+review_no;
 		}
 	});
 }
 function delete_review_reply(){
 	$.ajax({
 		type : 'delete',
-		url : '/detail/review_read/review_reply_delete/' + review_no ,
+		url : '/movie/review_reply_delete/' + review_no ,
 		headers : { 
 			"Content-Type" : "application/json"
 			},
 		data : '',
 		dataType : 'text',
 		success : function(result){
-			location.href="/detail/"+movie_id;
+			location.href="/movie/"+movie_id;
 		}
 	});
 }
@@ -215,44 +215,44 @@ function eidt_review(){
 
 
 function toList() {
-	location.href="/detail/"+movie_id;
+	location.href="/movie/"+movie_id;
 }
 
 getReplyList();
 function setReplyList(data, data1){
 	var result = "";  
-	var data_a = null;
-	var data_b = null;
+	var reply_list = null;
+	var reply_reply_list = null;
 	$(data).each(function(){
-		data_a = this;
-			if(data_a.reply_reply == "n"){
+		reply_list = this;
+			if(reply_list.reply_reply == "n"){
 				result += "<div>"
 				+ "<div class='div_re_uid' id='div_re_uid' name='div_re_uid'>"
-				+ "<input type='hidden' name='aa' value='"+data_a.no+"'/>"
+				+ "<input type='hidden' name='aa' value='"+reply_list.no+"'/>"
 				+ "<div style='margin-bottm: 5px; margin-left:20px; font-size:15px'>"
-				+"<b><span> 아이디 : "+ data_a.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ data_a.reply_date+"</span></b></div>"
-				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ data_a.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
+				+"<b><span> 아이디 : "+ reply_list.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ reply_list.reply_date+"</span></b></div>"
+				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ reply_list.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
 				+ "<button class='reply_write_submit_2 btn btn-info btn-xs' name='reply_write_submit_2' id='reply_write_submit_2' style='float: right; padding: 8px;'>"+"댓글"+"</button>"
 				+"<div><textarea disabled readonly='readonly' style='10px; padding: 2px; border: 0px;width: 840px; height: 70px; font-size:18px;"
-				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + data_a.reply_content
+				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + reply_list.reply_content
 				+"</textarea></div>" 
 				+"<div>" + "<hr class='hrone'>" + "</div>"
 				+ "</div>";
 			}
 			
 			$(data1).each(function(){
-				data_b = this;
-				if((data_b.reply_reply =="y" && data_a.no == data_b.reply_no)){
+				reply_reply_list = this;
+				if((reply_reply_list.reply_reply =="y" && reply_list.no == reply_reply_list.reply_no)){
 				result += "<div class='reply_list_wrap2' name='reply_list_wrap2'>"
 				+ "<div style='width: 35px; float: left;'>"
 				+ "<img src='http://cfile204.uf.daum.net/R400x0/187AFA4750920BDD311E02'"
 				+ "style='width: 50px; height: 54px;'>" +"<br/>"
 				+ "</div>"
 				+"<div style='margin-left:30px;'>"
-				+"<b><span style='margin-left:20px;'> 아이디 : "+ data_b.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ data_b.reply_date+"</span></b></div>"
-				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ data_b.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
+				+"<b><span style='margin-left:20px;'> 아이디 : "+ reply_reply_list.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ reply_reply_list.reply_date+"</span></b></div>"
+				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ reply_reply_list.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
 				+"<div><textarea disabled readonly='readonly' style='padding: 2px; border: 0px;width: 840px; height: 70px; font-size:18px;"
-				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + data_a.reply_content
+				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + reply_reply_list.reply_content
 				+"</textarea></div></div>" 
 				+"<div>" + "<hr class='hrone'>" + "</div>"
 				+ "</div>"
@@ -260,7 +260,7 @@ function setReplyList(data, data1){
 	});	
 });
 	result += "</div>";
-	document.getElementById("reply_list").innerHTML = result;
+	document.getElementById("reply").innerHTML = result;
 }
 
 
@@ -268,7 +268,7 @@ function getReplyList(){
 	
 	$.ajax({
 		type : 'get',
-		url : '/detail/reply/' + review_no,
+		url : '/movie/reply/' + review_no,
 		headers : {
 			"Content-Type" : "application/json",
 			//"X-HTTP-Method-Override" : "GET",  ----  POST 이거나 GET인경우는 생략가능
@@ -276,7 +276,7 @@ function getReplyList(){
 		dataType : 'json',
 		data : '',
 		success : function(result){
-			setReplyList(result.replylist ,result.replylist1);
+			setReplyList(result.replylist ,result.reply_reply_list);
 		}
 	});
 }
@@ -324,7 +324,7 @@ function insertReply2(no) {
 		
 	$.ajax({
 		type : 'post',
-		url : ' /review/new/reply/y/'+no,
+		url : ' /review/new/reply_reply/'+no,
 		headers : {
 			"Content-Type" : "application/json",
 			"X-HTTP-Method-Override" : "POST"
