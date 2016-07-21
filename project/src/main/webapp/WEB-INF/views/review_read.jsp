@@ -85,7 +85,7 @@ hr.hrone, hr.hrtwo {
 				<div id="member_id" style="float: left;">아이디 : ${reviewvo.member_id} </div>
 				<div id="review_date" style="float: right; ">등록 : ${reviewvo.review_date}</div>
 			</div>
-			<div style="width: 950px; height: 450px; margin-top: 20px; margin-left: 20px; border: 1px solid black">
+			<div style="width: 950px; height: 450px; margin-top: 20px; margin-left: 20px;">
 				 ${reviewvo.review_content }
 			</div>	
 			<div id="listbtdiv">
@@ -110,6 +110,7 @@ hr.hrone, hr.hrtwo {
 						onclick="insertReply(${reviewvo.no})">댓글 등록</button>
 				</div>
 			</div>
+			<hr class="hrone">
 			<div id="reply_list" class="reply_list"></div>
 			</div>
 		</div>
@@ -161,7 +162,7 @@ function delete_review_reply(){
 		data : '',
 		dataType : 'text',
 		success : function(result){
-			location.href="/detail/review_read/"+review_no;
+			location.href="/detail/"+movie_id;
 		}
 	});
 }
@@ -232,7 +233,7 @@ function setReplyList(data, data1){
 				+"<b><span> 아이디 : "+ data_a.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ data_a.reply_date+"</span></b></div>"
 				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ data_a.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
 				+ "<button class='reply_write_submit_2 btn btn-info btn-xs' name='reply_write_submit_2' id='reply_write_submit_2' style='float: right; padding: 8px;'>"+"댓글"+"</button>"
-				+"<div><textarea disabled readonly='readonly' style='10px; padding: 10px; border: 0px;width: 840px; height: 100px; font-size:18px;"
+				+"<div><textarea disabled readonly='readonly' style='10px; padding: 2px; border: 0px;width: 840px; height: 70px; font-size:18px;"
 				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + data_a.reply_content
 				+"</textarea></div>" 
 				+"<div>" + "<hr class='hrone'>" + "</div>"
@@ -250,7 +251,7 @@ function setReplyList(data, data1){
 				+"<div style='margin-left:30px;'>"
 				+"<b><span style='margin-left:20px;'> 아이디 : "+ data_b.user_id +"</span><span style=' margin-left:20px;'> 등록일  :"+ data_b.reply_date+"</span></b></div>"
 				+ "<button class='btn btn-info btn-xs' onclick='delete_reply("+ data_b.no +")'; style='float: right; padding: 8px;'>"+"삭제"+"</button>"
-				+"<div><textarea disabled readonly='readonly' style='10px; padding: 10px; border: 0px;width: 840px; height: 100px; font-size:18px;"
+				+"<div><textarea disabled readonly='readonly' style='padding: 2px; border: 0px;width: 840px; height: 70px; font-size:18px;"
 				+"resize: none; margin-top: 5px; margin-left: 20px; background-color: white'>" + data_a.reply_content
 				+"</textarea></div></div>" 
 				+"<div>" + "<hr class='hrone'>" + "</div>"
@@ -360,7 +361,7 @@ $(document).on("click","div.div_re_uid button",function() {//동적으로 버튼
 							+ '<input type="hidden" id="reply_no" name="reply_no" value="'+a+'"/>'
 							+ '<input type="text" id="user_id2" name="user_id2" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10" style="width : 200px;"/>'
 							+ '<button id="reply_submit_2" class="reply_submit_2 btn btn-primary" onclick="insertReply2('+${ reviewvo.no }+')" style="margin-left:10px;">댓글 등록</button>'
-							+ '<textarea id="reply_content2" name="reply_content2" class="inputreply2 form-control col-lg-12" rows="4"></textarea>'
+							+ '<textarea id="reply_content2" name="reply_content2" class="inputreply2 form-control col-lg-12" rows="4" style=""></textarea>'
 							+ '<input type="hidden" id="review_no" name="review_no" value="' + ${ reviewvo.no } + '" />'
 							+'<br/><br/>'
 							+ '</div>' + '</form>' + '</div>';

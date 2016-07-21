@@ -312,8 +312,18 @@ public class DetailDAOImpl implements DetailDAO {
 	@Override
 	public void delete_review_reply(int review_no) {
 		// TODO Auto-generated method stub
-		ReplyVO vo = entityManager.find(ReplyVO.class, review_no);
-		entityManager.remove(vo);
+		// TODO Auto-generated method stub
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<ReplyVO> cq = cb.createQuery(ReplyVO.class);
+		Root<ReplyVO> root = cq.from(ReplyVO.class);
+		Predicate p = cb.equal(root.get("review_no"), review_no);
+		cq.select(root);
+		cq.where(p);
+		TypedQuery<ReplyVO> tq = entityManager.createQuery(cq);
+		List<ReplyVO> replylist = tq.getResultList();
+		for(ReplyVO replyvo : replylist){
+			entityManager.remove(replyvo);
+		}
 	}
 	
 	
@@ -328,7 +338,7 @@ public class DetailDAOImpl implements DetailDAO {
 		entityManager.remove(vo);
 	}
 	
-//	@Override ½ÇÆÐ..
+//	@Override ï¿½ï¿½ï¿½ï¿½..
 //	public void delete_review_reply(int review_no) {
 //		// TODO Auto-generated method stub
 //		List<ReplyVO> replylist = entityManager.createQuery("select review_no from ReplyVO review_no",ReplyVO.class).getResultList();		

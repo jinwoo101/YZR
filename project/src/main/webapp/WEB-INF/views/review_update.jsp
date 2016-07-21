@@ -116,7 +116,6 @@ function updateReview() {
 	oEditors.getById["review_content"].exec("UPDATE_CONTENTS_FIELD", []);
 	var review_title = $("#review_title").val();
 	var review_content =  $("#review_content").val();
-	alert(review_content);
 	$.ajax({
 		type : 'put',
 		url : '/review/update/'+no ,
