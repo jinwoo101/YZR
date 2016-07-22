@@ -70,19 +70,22 @@ public class MovielController {
 		}
 		return entity;
 	}
+//	
+//	HttpSession session = request.getSession();
+//	String member_id = (String)session.getAttribute("member_id");
 	
 	@RequestMapping(value = "/movie/chart/{movie_id}", method = RequestMethod.POST)
-	public ResponseEntity<String> chart_update(@PathVariable("movie_id") String movie_id, @RequestBody GpaVO vo) {
+	public ResponseEntity<String> chart_update(@PathVariable("movie_id") String movie_id, @RequestBody GpaVO vo,HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
 		System.out.println("acting" + vo.getActing());
-		try {
-			System.out.println("action");
-			Movie_service.gpaUpdate(movie_id, vo.getActing(), vo.getDirection(), vo.getBeauty(), vo.getOst(), vo.getStory(),
-					vo.getMale(), vo.getFemale(), vo.getTeenager(), vo.getTwenties(), vo.getThirties(),
-					vo.getForties());
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-		} catch (Exception e) {
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			try {
+				System.out.println("action");
+				Movie_service.gpaUpdate(movie_id, vo.getActing(), vo.getDirection(), vo.getBeauty(), vo.getOst(), vo.getStory(),
+						vo.getMale(), vo.getFemale(), vo.getTeenager(), vo.getTwenties(), vo.getThirties(),
+						vo.getForties());
+				entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			} catch (Exception e) {
+				entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

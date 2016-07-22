@@ -77,16 +77,24 @@ hr.hrone, hr.hrtwo {
 			<div>
 				<h2>후기</h2>
 			</div>
+			
 			<!-- 제목 작성자 날짜 -->
-			<div id="titlediv" style="padding: 10px;">
-				제목 : ${reviewvo.review_title }
-			</div>
-			<div style="padding: 10px; margin-bottom: 30px;">
-				<div id="member_id" style="float: left;">아이디 : ${reviewvo.member_id} </div>
-				<div id="review_date" style="float: right; ">등록 : ${reviewvo.review_date}</div>
-			</div>
+			<table class="table table-striped">
+				<tr class="danger">
+					<th width="150px;"> 제목 </td>
+					<td colspan="3"><b>${reviewvo.review_title }asdf가가가가가가가가가가가가가가가ㅏ가가가</b></td>			
+				</tr>
+				<tr class="danger">
+					<th> 아이디 </th>
+					<td>${reviewvo.member_id} </td>
+					<th width="150px;"> 등록일 </th>
+					<td width="300px;">${reviewvo.review_date}</td>
+				</tr>
+			</table>			
+			
+
 			<div style="width: 950px; height: 450px; margin-top: 20px; margin-left: 20px;">
-				 ${reviewvo.review_content }
+				 ${reviewvo.review_content }	
 			</div>	
 			<div id="listbtdiv">
 				<button type="button" class="btn btn-danger" onclick="eidt_review()">수정</button>
@@ -104,7 +112,6 @@ hr.hrone, hr.hrtwo {
 					<textarea id="reply_content" name="reply_content" class="form-control col-lg-12" rows="4" style="resize: none;"></textarea>
 					<input type="hidden" id="review_no" name="review_no" value="${reviewvo.no }" />
 				</div>
-				</form>
 				<div class="reply_write_submit" id="1">
 					<button id="reply_submit" class="reply_submit btn btn-primary"
 						onclick="insertReply(${reviewvo.no})">댓글 등록</button>

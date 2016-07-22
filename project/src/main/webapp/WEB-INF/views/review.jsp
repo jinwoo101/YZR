@@ -37,7 +37,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 function pasteHTML(filename){
 
-	var sHTML = '<img src="E:/git/YZR/project/resources/image/'+filename+'">';
+	var sHTML = '<img src="/resources/images/'+filename+'">';
 
 	oEditors.getById["review_content"].exec("PASTE_HTML", [sHTML]); 
 

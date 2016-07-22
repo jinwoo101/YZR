@@ -209,6 +209,7 @@ function review_write(id) {
 	location.href = "/review/" + id;
 }
 var resulta = null;
+
 function updategpa() {
 	var acting = $(':radio[name="acting"]:checked').val();
 	var direction = $(':radio[name="direction"]:checked').val();
@@ -221,33 +222,39 @@ function updategpa() {
 	var twenties = $(".twenties:checked").val();
 	var thirties = $(".thirties:checked").val();
 	var forties = $(".forties:checked").val();
-	$.ajax({
-		type : 'post',
-		url : '/movie/chart/${movie_id}',
-		headers : {
-			"Content-Type" : "application/json",
-		//"X-HTTP-Method-Override" : "PUT"
-		},
-		data : JSON.stringify({
-			"acting" : acting,
-			"direction" : direction,
-			"beauty" : beauty,
-			"ost" : ost,
-			"story" : story,
-			"male" : male,
-			"female" : female,
-			"teenager" : teenager,
-			"twenties" : twenties,
-			"thirties" : thirties,
-			"forties" : forties,
-		}),
-		dataType : 'text',
-		success : function(result) {
-			if (result == "SUCCESS") {
-				getList();
+	var member_id = "${member_id}";
+	if(member_id !=null || member_id != ""){
+		$.ajax({
+			type : 'post',
+			url : '/movie/chart/${movie_id}',
+			headers : {
+				"Content-Type" : "application/json",
+			//"X-HTTP-Method-Override" : "PUT"
+			},
+			data : JSON.stringify({
+				"acting" : acting,
+				"direction" : direction,
+				"beauty" : beauty,
+				"ost" : ost,
+				"story" : story,
+				"male" : male,
+				"female" : female,
+				"teenager" : teenager,
+				"twenties" : twenties,
+				"thirties" : thirties,
+				"forties" : forties,
+			}),
+			dataType : 'text',
+			success : function(result) {
+				if (result == "SUCCESS") {
+					getList();
+				}
 			}
-		}
-	});
+		});
+	}else{
+		location.href="/login";
+		
+	}
 }
 function getList() {
 		$.ajax({
