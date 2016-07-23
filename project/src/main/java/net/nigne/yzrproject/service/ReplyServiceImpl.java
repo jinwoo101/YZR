@@ -27,27 +27,27 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public void replyinsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date,String reply_reply) throws Exception {
-		dao.replyinsert(reply_no,review_no, user_id, reply_content, reply_date, reply_reply);
+	public void replyInsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date,String reply_reply) throws Exception {
+		dao.replyInsert(reply_no,review_no, user_id, reply_content, reply_date, reply_reply);
 	}
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public List<ReplyVO> getreply(int review_no) {
+	public List<ReplyVO> getReply(int review_no) {
 		// TODO Auto-generated method stub
-		return dao.getreply(review_no);
+		return dao.getReply(review_no);
 	}
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public List<ReplyVO> getreply_reply(int review_no) {
+	public List<ReplyVO> getReply_Reply(int review_no) {
 		// TODO Auto-generated method stub
-		return dao.getreply_reply(review_no);
+		return dao.getReply_Reply(review_no);
 	}
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public void reply_reply_insert(int reply_no, int review_no, String user_id, String reply_content, String reply_date,
+	public void reply_Reply_Insert(int reply_no, int review_no, String user_id, String reply_content, String reply_date,
 			String reply_reply) throws Exception {
 		// TODO Auto-generated method stub
-		dao.reply_reply_insert(reply_no, review_no, user_id, reply_content, reply_date, reply_reply);
+		dao.reply_Reply_Insert(reply_no, review_no, user_id, reply_content, reply_date, reply_reply);
 		
 	}
 	@Transactional(rollbackFor = { Exception.class })
@@ -58,18 +58,18 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public List<ReplyVO> getreplyPage(int review_no, Criteria criteria) {
+	public List<ReplyVO> getReplyPage(int review_no, Criteria criteria) {
 		// TODO Auto-generated method stub
-		return dao.getreplyPage(review_no, criteria);
+		return dao.getReplyPage(review_no, criteria);
 	}
 
 
 
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public void delete_reply(int no) {
+	public void delete_Reply(int no) {
 		// TODO Auto-generated method stub
-		dao.delete_reply(no);
+		dao.delete_Reply(no);
 	}
 	
 	

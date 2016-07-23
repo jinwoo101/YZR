@@ -33,7 +33,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public void Reviewcnt_Update(int no, int review_cnt) throws Exception {
 		
-		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_read(no).getNo());
+		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_Read(no).getNo());
 		ReviewVO mergevo = entityManager.merge(vo);
 		mergevo.setReview_cnt(review_cnt + 1);
 	}
@@ -85,7 +85,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public ReviewVO getReview_read(int no) {
+	public ReviewVO getReview_Read(int no) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ReviewVO> cq = cb.createQuery(ReviewVO.class);
@@ -129,9 +129,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 
 	@Override
-	public void Review_update(int no, String review_title, String review_content) throws Exception {
+	public void Review_Update(int no, String review_title, String review_content) throws Exception {
 		// TODO Auto-generated method stub
-		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_read(no).getNo());
+		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_Read(no).getNo());
 		ReviewVO mergevo = entityManager.merge(vo);
 		mergevo.setNo(no);
 		mergevo.setReview_title(review_title);
@@ -139,15 +139,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public void delete_review(int no) {
+	public void delete_Review(int no) {
 		// TODO Auto-generated method stub
-		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_read(no).getNo());
+		ReviewVO vo = entityManager.find(ReviewVO.class, getReview_Read(no).getNo());
 		entityManager.remove(vo);
 		
 	}
 
 	@Override
-	public void delete_review_reply(int review_no) {
+	public void delete_Review_Reply(int review_no) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

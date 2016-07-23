@@ -18,12 +18,12 @@ public interface ReviewService {
 	public void reviewInsert(String member_id, String movie_id, String review_title, String review_content,
 			String review_date, int review_cnt, String review_file, String review_like) throws Exception;
 	public List<ReviewVO> getReview(String movie_id);
-	public ReviewVO getReview_read(int no);
+	public ReviewVO getReview_Read(int no);
 	public long getTotalCount(String movie_id);
 	public List<ReviewVO> getListPage(String movie_id, Criteria criteria);
 	public void Reviewcnt_Update(int no, int review_cnt) throws Exception;
-	public void delete_review(int review_no);
-	public void delete_review_reply(int review_no);
-	public void Review_update(int no,String review_title, String review_content) throws Exception;
+	public void delete_Review(int review_no);
+	public void delete_Review_Reply(int review_no);
+	public void Review_Update(int no,String review_title, String review_content) throws Exception;
 
 }

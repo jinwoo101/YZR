@@ -48,11 +48,11 @@ public class MovielController {
 		model.addAttribute("movievo", movievo);
 		List<ActorVO> actorlist = Movie_service.getActor(movie_id);
 		model.addAttribute("actorlist", actorlist);
-		List<DirectorVO> directorlist = Movie_service.getdirector(movie_id);
+		List<DirectorVO> directorlist = Movie_service.getDirector(movie_id);
 		model.addAttribute("directorlist", directorlist);
 		List<GenreVO> genrelist = Movie_service.getGenre(movie_id);
 		model.addAttribute("genrelist", genrelist);
-		GpaVO gpavo = Movie_service.getgpa(movie_id);
+		GpaVO gpavo = Movie_service.getGpa(movie_id);
 		model.addAttribute("gpavo", gpavo);
 		
 		List<ReviewVO> reviewlist = Review_service.getReview(movie_id);
@@ -63,7 +63,7 @@ public class MovielController {
 	public ResponseEntity<GpaVO> get(@PathVariable("movie_id") String movie_id) {
 		ResponseEntity<GpaVO> entity = null;
 		try {
-			GpaVO vo = Movie_service.getgpa(movie_id);
+			GpaVO vo = Movie_service.getGpa(movie_id);
 			entity = new ResponseEntity<>(vo, HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

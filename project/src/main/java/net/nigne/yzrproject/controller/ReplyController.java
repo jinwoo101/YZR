@@ -45,8 +45,8 @@ public class ReplyController {
 		ResponseEntity<Map<String, Object>> entity = null;
 		
 		try{
-			List<ReplyVO> replylist = Reply_service.getreply(no);	
-			List<ReplyVO> reply_reply_list = Reply_service.getreply_reply(no);
+			List<ReplyVO> replylist = Reply_service.getReply(no);	
+			List<ReplyVO> reply_reply_list = Reply_service.getReply_Reply(no);
 			Map<String, Object> map = new HashMap<>();
 			map.put("replylist", replylist);
 			map.put("reply_reply_list", reply_reply_list);
@@ -63,7 +63,7 @@ public class ReplyController {
 	public ResponseEntity<String> reply_insert(@RequestBody ReplyVO vo,@PathVariable("no") int no) {
 		ResponseEntity<String> entity = null;
 		try {
-			Reply_service.replyinsert(vo.getReply_no(),vo.getReview_no(), vo.getUser_id(), vo.getReply_content(), vo.getReply_date(), vo.getReply_reply());
+			Reply_service.replyInsert(vo.getReply_no(),vo.getReview_no(), vo.getUser_id(), vo.getReply_content(), vo.getReply_date(), vo.getReply_reply());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -75,7 +75,7 @@ public class ReplyController {
 	public ResponseEntity<String> reply_reply_insert(@RequestBody ReplyVO vo,@PathVariable("no") int no) {
 		ResponseEntity<String> entity = null;
 		try {
-			Reply_service.reply_reply_insert(vo.getReply_no(),vo.getReview_no(), vo.getUser_id(), vo.getReply_content(), vo.getReply_date(), vo.getReply_reply());
+			Reply_service.reply_Reply_Insert(vo.getReply_no(),vo.getReview_no(), vo.getUser_id(), vo.getReply_content(), vo.getReply_date(), vo.getReply_reply());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -87,7 +87,7 @@ public class ReplyController {
 	public ResponseEntity<String> deleteReply(@PathVariable("no") Integer no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
-			Reply_service.delete_reply(no);
+			Reply_service.delete_Reply(no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 

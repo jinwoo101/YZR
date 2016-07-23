@@ -18,8 +18,8 @@ public interface MovieDAO {
 
 	public MovieVO getList(String movie_id);
 	public List<ActorVO> getActor(String movie_id);
-	public List<DirectorVO> getdirector(String movie_id);
-	public GpaVO getgpa(String movie_id);	
+	public List<DirectorVO> getDirector(String movie_id);
+	public GpaVO getGpa(String movie_id);	
 	public void gpaUpdate(String movie_id, int acting, int direction, int beauty, int ost, int story, int male,
 			int female, int teenager, int twenties, int thirties, int forties) throws Exception;
 	public List<GenreVO> getGenre(String movie_id);

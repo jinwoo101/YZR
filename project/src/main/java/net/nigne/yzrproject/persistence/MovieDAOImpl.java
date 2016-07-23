@@ -57,7 +57,7 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	@Override
-	public List<DirectorVO> getdirector(String movie_id) {
+	public List<DirectorVO> getDirector(String movie_id) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<DirectorVO> cq = cb.createQuery(DirectorVO.class);
@@ -70,7 +70,7 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	@Override
-	public GpaVO getgpa(String movie_id) {
+	public GpaVO getGpa(String movie_id) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<GpaVO> cq = cb.createQuery(GpaVO.class);
 		Root<GpaVO> root = cq.from(GpaVO.class);
@@ -86,7 +86,7 @@ public class MovieDAOImpl implements MovieDAO {
 	public void gpaUpdate(String movie_id, int acting, int direction, int beauty, int ost, int story, int male,
 			int female, int teenager, int twenties, int thirties, int forties) throws Exception {
 		// TODO Auto-generated method stub
-		GpaVO vo = entityManager.find(GpaVO.class, getgpa(movie_id).getMovie_id());
+		GpaVO vo = entityManager.find(GpaVO.class, getGpa(movie_id).getMovie_id());
 		GpaVO mergevo = entityManager.merge(vo);
 		mergevo.setActing(
 				(vo.getActing() * (vo.getFemale() + vo.getMale()) + acting) / (vo.getFemale() + vo.getMale() + 1));

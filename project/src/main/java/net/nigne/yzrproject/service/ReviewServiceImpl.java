@@ -40,9 +40,9 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public ReviewVO getReview_read(int no) {
+	public ReviewVO getReview_Read(int no) {
 		// TODO Auto-generated method stub
-		return dao.getReview_read(no);
+		return dao.getReview_Read(no);
 	}
 	
 
@@ -69,24 +69,24 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public void Review_update(int no, String review_title, String review_content) throws Exception {
-		dao.Review_update(no, review_title, review_content);
+	public void Review_Update(int no, String review_title, String review_content) throws Exception {
+		dao.Review_Update(no, review_title, review_content);
 		
 	}
 	
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public void delete_review(int review_no) {
+	public void delete_Review(int review_no) {
 		// TODO Auto-generated method stub
-		dao.delete_review(review_no);
+		dao.delete_Review(review_no);
 	}
 	
 	
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public void delete_review_reply(int review_no) {
+	public void delete_Review_Reply(int review_no) {
 		// TODO Auto-generated method stub
-		 dao.delete_review_reply(review_no);
+		 dao.delete_Review_Reply(review_no);
 	}
 	
 

@@ -44,7 +44,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public void replyinsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date,
+	public void replyInsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date,
 			String reply_reply) throws Exception {
 		ReplyVO vo = new ReplyVO();
 		vo.setReply_no(reply_no);
@@ -60,7 +60,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> getreply(int review_no) {
+	public List<ReplyVO> getReply(int review_no) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ReplyVO> cq = cb.createQuery(ReplyVO.class);
@@ -73,7 +73,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> getreply_reply(int review_no) {
+	public List<ReplyVO> getReply_Reply(int review_no) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ReplyVO> cq = cb.createQuery(ReplyVO.class);
@@ -86,7 +86,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public void reply_reply_insert(int reply_no, int review_no, String user_id, String reply_content, String reply_date,
+	public void reply_Reply_Insert(int reply_no, int review_no, String user_id, String reply_content, String reply_date,
 			String reply_reply) throws Exception {
 		ReplyVO vo = new ReplyVO();
 		vo.setReply_no(reply_no);
@@ -116,7 +116,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> getreplyPage(int review_no, Criteria criteria) {
+	public List<ReplyVO> getReplyPage(int review_no, Criteria criteria) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -130,7 +130,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return replywpagelist;
 	}	
 	@Override
-	public void delete_reply(int no) {
+	public void delete_Reply(int no) {
 		// TODO Auto-generated method stub
 		ReplyVO vo = entityManager.find(ReplyVO.class, no);
 		entityManager.remove(vo);

@@ -7,7 +7,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
-String path = "E:/server_resource/images"; // 이미지가 저장될 주소
+String path = "D:/git/YZR/project/src/main/webapp/resources/images"; // 이미지가 저장될 주소
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){

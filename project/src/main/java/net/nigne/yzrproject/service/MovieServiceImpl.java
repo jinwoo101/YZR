@@ -41,15 +41,15 @@ public class MovieServiceImpl implements MovieService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<DirectorVO> getdirector(String movie_id) {
+	public List<DirectorVO> getDirector(String movie_id) {
 		// TODO Auto-generated method stub
-		return dao.getdirector(movie_id);
+		return dao.getDirector(movie_id);
 	}
 
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public GpaVO getgpa(String movie_id) {
-		return dao.getgpa(movie_id);
+	public GpaVO getGpa(String movie_id) {
+		return dao.getGpa(movie_id);
 	}
 
 	@Transactional(rollbackFor = { Exception.class })

@@ -13,17 +13,13 @@ import net.nigne.yzrproject.domain.ReplyVO;
 import net.nigne.yzrproject.domain.ReviewVO;
 
 public interface ReplyService {
-	
-
-
-
-	public List<ReplyVO> getreply(int review_no);
-	public List<ReplyVO> getreply_reply(int review_no);
+	public List<ReplyVO> getReply(int review_no);
+	public List<ReplyVO> getReply_Reply(int review_no);
 	public long getReplyCount(int review_no);
-	public List<ReplyVO> getreplyPage(int review_no, Criteria criteria);
-	public void replyinsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
-	public void reply_reply_insert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
-	public void delete_reply(int no);
+	public List<ReplyVO> getReplyPage(int review_no, Criteria criteria);
+	public void replyInsert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
+	public void reply_Reply_Insert(int reply_no,int review_no, String user_id, String reply_content, String reply_date, String reply_reply) throws Exception;
+	public void delete_Reply(int no);
 	
 
 }

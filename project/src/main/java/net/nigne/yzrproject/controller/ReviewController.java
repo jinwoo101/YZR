@@ -44,13 +44,13 @@ public class ReviewController {
 
 	@RequestMapping(value = "movie/review_read/{no}", method = RequestMethod.GET)
 	public String review_read(Locale locale, Model model,@PathVariable("no") int no) throws Exception {
-		ReviewVO reviewvo = review_service.getReview_read(no);
+		ReviewVO reviewvo = review_service.getReview_Read(no);
 		model.addAttribute("reviewvo", reviewvo);
 		
-		List<ReplyVO> replylist = Reply_service.getreply(no);
+		List<ReplyVO> replylist = Reply_service.getReply(no);
 		model.addAttribute("replylist", replylist);
 		
-		List<ReplyVO> replylist1 = Reply_service.getreply_reply(no);
+		List<ReplyVO> replylist1 = Reply_service.getReply_Reply(no);
 		model.addAttribute("replylist1", replylist1);
 		
 		review_service.Reviewcnt_Update(no, reviewvo.getReview_cnt());
@@ -101,7 +101,7 @@ public class ReviewController {
 	
 	@RequestMapping(value = "/review_update_read/{review_no}", method = RequestMethod.POST)
 	public String review_update_read(@PathVariable("review_no") int review_no, Model model) {
-		ReviewVO reviewvo = review_service.getReview_read(review_no);
+		ReviewVO reviewvo = review_service.getReview_Read(review_no);
 		model.addAttribute("reviewvo",reviewvo);
 		return "review_update";
 	}
@@ -110,7 +110,7 @@ public class ReviewController {
 	public ResponseEntity<String> update_review(@PathVariable("no") int no, @RequestBody ReviewVO vo) {
 		ResponseEntity<String> entity = null;
 		try {
-			review_service.Review_update(no, vo.getReview_title(), vo.getReview_content());
+			review_service.Review_Update(no, vo.getReview_title(), vo.getReview_content());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -122,7 +122,7 @@ public class ReviewController {
 	public ResponseEntity<String> deleteReview(@PathVariable("review_no") Integer review_no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
-			review_service.delete_review(review_no);
+			review_service.delete_Review(review_no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
@@ -133,7 +133,7 @@ public class ReviewController {
 	public ResponseEntity<String> deleteReview_reply(@PathVariable("review_no") Integer review_no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
-			review_service.delete_review_reply(review_no);
+			review_service.delete_Review_Reply(review_no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
