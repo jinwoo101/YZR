@@ -108,6 +108,14 @@ nhn.husky.EZCreator.createInIFrame({
     fCreator: "createSEditor2",
 });
 
+function pasteHTML(filename) {
+
+	var sHTML = '<img src="/resources/images/'+filename+'"style="width:400px; height:400px;">';
+
+	oEditors.getById["review_content"].exec("PASTE_HTML", [ sHTML ]);
+
+}
+
 function toList() {
 	location.href="/movie/"+movie_id1;
 }

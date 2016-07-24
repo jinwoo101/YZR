@@ -37,25 +37,25 @@ import net.nigne.yzrproject.service.ReviewService;
 @Controller
 public class MovielController {
 	@Autowired
-	private MovieService Movie_service;
+	private MovieService Movie_Service;
 	@Autowired
-	private ReviewService Review_service;
+	private ReviewService Review_Service;
 	
 
 	@RequestMapping(value = "/movie/{movie_id}", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, @PathVariable("movie_id") String movie_id) throws Exception {
-		MovieVO movievo = Movie_service.getList(movie_id);
+		MovieVO movievo = Movie_Service.getList(movie_id);
 		model.addAttribute("movievo", movievo);
-		List<ActorVO> actorlist = Movie_service.getActor(movie_id);
+		List<ActorVO> actorlist = Movie_Service.getActor(movie_id);
 		model.addAttribute("actorlist", actorlist);
-		List<DirectorVO> directorlist = Movie_service.getDirector(movie_id);
+		List<DirectorVO> directorlist = Movie_Service.getDirector(movie_id);
 		model.addAttribute("directorlist", directorlist);
-		List<GenreVO> genrelist = Movie_service.getGenre(movie_id);
+		List<GenreVO> genrelist = Movie_Service.getGenre(movie_id);
 		model.addAttribute("genrelist", genrelist);
-		GpaVO gpavo = Movie_service.getGpa(movie_id);
+		GpaVO gpavo = Movie_Service.getGpa(movie_id);
 		model.addAttribute("gpavo", gpavo);
 		
-		List<ReviewVO> reviewlist = Review_service.getReview(movie_id);
+		List<ReviewVO> reviewlist = Review_Service.getReview(movie_id);
 		model.addAttribute("reviewlist", reviewlist);
 		return "movie";
 	}
@@ -63,7 +63,7 @@ public class MovielController {
 	public ResponseEntity<GpaVO> get(@PathVariable("movie_id") String movie_id) {
 		ResponseEntity<GpaVO> entity = null;
 		try {
-			GpaVO vo = Movie_service.getGpa(movie_id);
+			GpaVO vo = Movie_Service.getGpa(movie_id);
 			entity = new ResponseEntity<>(vo, HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -80,7 +80,7 @@ public class MovielController {
 		System.out.println("acting" + vo.getActing());
 			try {
 				System.out.println("action");
-				Movie_service.gpaUpdate(movie_id, vo.getActing(), vo.getDirection(), vo.getBeauty(), vo.getOst(), vo.getStory(),
+				Movie_Service.gpaUpdate(movie_id, vo.getActing(), vo.getDirection(), vo.getBeauty(), vo.getOst(), vo.getStory(),
 						vo.getMale(), vo.getFemale(), vo.getTeenager(), vo.getTwenties(), vo.getThirties(),
 						vo.getForties());
 				entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);

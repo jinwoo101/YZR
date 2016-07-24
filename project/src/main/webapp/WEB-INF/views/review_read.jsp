@@ -126,8 +126,72 @@ hr.hrone, hr.hrtwo {
 var review_no = "${reviewvo.no}";
 var movie_id =  "${reviewvo.movie_id}";
 var review_title ="${reviewvo.review_title}";
-var review_content = "${reviewvo.review_content}";
+var review_content = '${reviewvo.review_content}';
 var member_id = "${reviewvo.member_id}";
+
+function insertReply(no) {
+	var review_no = $("#review_no").val();
+	var reply_reply = $("#reply_reply").val();
+	var user_id = $("#user_id").val();
+	var reply_content = $("#reply_content").val();
+	var reply_no = $("#review_no").val();
+		
+	$.ajax({
+		type : 'post',
+		url : ' /review/new/reply/'+no,
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "POST"
+		},
+		data : JSON.stringify({
+			"user_id" : user_id,
+			"reply_content" : reply_content,
+			"reply_no" : reply_no,
+			"reply_reply" : reply_reply,
+			"review_no" : review_no
+		}),
+		dataType : 'text',
+		success : function(result) {
+			if (result == "SUCCESS") {
+				getReplyList();
+			}
+		}
+	});
+}
+
+
+function insertReply2(no) {
+	
+	var review_no = $("#review_no").val();
+	var reply_reply2 = $("#reply_reply2").val();
+	var user_id2 = $("#user_id2").val();
+	var reply_content = $("#reply_content2").val();
+	var reply_no = $("#reply_no").val();
+		
+	$.ajax({
+		type : 'post',
+		url : ' /review/new/reply_reply/'+no,
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "POST"
+		},
+		data : JSON.stringify({
+			"user_id" : user_id2,
+			"reply_content" : reply_content,
+			"reply_no" : reply_no,
+			"reply_reply" : reply_reply2,
+			"review_no" : review_no
+		}),
+		dataType : 'text',
+		success : function(result) {
+			if (result == "SUCCESS") {
+				getReplyList();
+			}
+		}
+	});
+}
+
+
 
 
 function delete_review(){
@@ -289,68 +353,6 @@ function getReplyList(){
 }
 
 
-	
-function insertReply(no) {
-	var review_no = $("#review_no").val();
-	var reply_reply = $("#reply_reply").val();
-	var user_id = $("#user_id").val();
-	var reply_content = $("#reply_content").val();
-	var reply_no = $("#review_no").val();
-		
-	$.ajax({
-		type : 'post',
-		url : ' /review/new/reply/'+no,
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "POST"
-		},
-		data : JSON.stringify({
-			"user_id" : user_id,
-			"reply_content" : reply_content,
-			"reply_no" : reply_no,
-			"reply_reply" : reply_reply,
-			"review_no" : review_no
-		}),
-		dataType : 'text',
-		success : function(result) {
-			if (result == "SUCCESS") {
-				getReplyList();
-			}
-		}
-	});
-}
-
-
-function insertReply2(no) {
-	
-	var review_no = $("#review_no").val();
-	var reply_reply2 = $("#reply_reply2").val();
-	var user_id2 = $("#user_id2").val();
-	var reply_content = $("#reply_content2").val();
-	var reply_no = $("#reply_no").val();
-		
-	$.ajax({
-		type : 'post',
-		url : ' /review/new/reply_reply/'+no,
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "POST"
-		},
-		data : JSON.stringify({
-			"user_id" : user_id2,
-			"reply_content" : reply_content,
-			"reply_no" : reply_no,
-			"reply_reply" : reply_reply2,
-			"review_no" : review_no
-		}),
-		dataType : 'text',
-		success : function(result) {
-			if (result == "SUCCESS") {
-				getReplyList();
-			}
-		}
-	});
-}
 
 $(document).on("click","div.div_re_uid button",function() {//동적으로 버튼이 생긴 경우 처리 방식
 					if ($(this).attr("name") == "reply_write_submit_2") {

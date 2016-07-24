@@ -38,28 +38,37 @@ import net.nigne.yzrproject.service.ReviewService;
 @Controller
 public class ReviewController {
 	@Autowired
-	private ReviewService review_service;
+	private ReviewService Review_Service;
 	@Autowired
-	private ReplyService Reply_service;
+	private ReplyService Reply_Service;
+	@Autowired
+	private MovieService Movie_Service;
 
 	@RequestMapping(value = "movie/review_read/{no}", method = RequestMethod.GET)
 	public String review_read(Locale locale, Model model,@PathVariable("no") int no) throws Exception {
-		ReviewVO reviewvo = review_service.getReview_Read(no);
+		ReviewVO reviewvo = Review_Service.getReview_Read(no);
 		model.addAttribute("reviewvo", reviewvo);
 		
-		List<ReplyVO> replylist = Reply_service.getReply(no);
+		List<ReplyVO> replylist = Reply_Service.getReply(no);
 		model.addAttribute("replylist", replylist);
 		
-		List<ReplyVO> replylist1 = Reply_service.getReply_Reply(no);
+		List<ReplyVO> replylist1 = Reply_Service.getReply_Reply(no);
 		model.addAttribute("replylist1", replylist1);
 		
-		review_service.Reviewcnt_Update(no, reviewvo.getReview_cnt());
+		Review_Service.Reviewcnt_Update(no, reviewvo.getReview_cnt());
 		return "review_read";
 	}
 
 	@RequestMapping(value = "/review/{movie_id}", method = RequestMethod.GET)
 	public String review_write(Locale locale, Model model, @PathVariable("movie_id") String movie_id) throws Exception {
-		model.addAttribute("movie_id", movie_id);
+		MovieVO movievo = Movie_Service.getList(movie_id) ;
+		model.addAttribute("movievo",movievo);
+		List<ActorVO> actorlist = Movie_Service.getActor(movie_id);
+		model.addAttribute("actorlist", actorlist);
+		List<DirectorVO> directorlist = Movie_Service.getDirector(movie_id);
+		model.addAttribute("directorlist", directorlist);
+		List<GenreVO> genrelist = Movie_Service.getGenre(movie_id);
+		model.addAttribute("genrelist", genrelist);
 		return "review";
 	}
 	
@@ -69,7 +78,7 @@ public class ReviewController {
 		ResponseEntity<String> entity = null;
 
 		try {
-			review_service.reviewInsert(vo.getMember_id(), movie_id , vo.getReview_title(), vo.getReview_content(),vo.getReview_date(),vo.getReview_cnt(),vo.getReview_file(), vo.getReview_like());
+			Review_Service.reviewInsert(vo.getMember_id(), movie_id , vo.getReview_title(), vo.getReview_content(),vo.getReview_date(),vo.getReview_cnt(),vo.getReview_file(), vo.getReview_like());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -86,8 +95,8 @@ public class ReviewController {
 		try{
 			Criteria criteria = new Criteria();
 			criteria.setPage(page);
-			long replyTotal = review_service.getTotalCount(movie_id);
-			List<ReviewVO> list = review_service.getListPage(movie_id, criteria);
+			long replyTotal = Review_Service.getTotalCount(movie_id);
+			List<ReviewVO> list = Review_Service.getListPage(movie_id, criteria);
 			PageMaker pm = new PageMaker(criteria, replyTotal);
 			Map<String, Object> map = new HashMap<>();
 			map.put("l", list);
@@ -101,7 +110,7 @@ public class ReviewController {
 	
 	@RequestMapping(value = "/review_update_read/{review_no}", method = RequestMethod.POST)
 	public String review_update_read(@PathVariable("review_no") int review_no, Model model) {
-		ReviewVO reviewvo = review_service.getReview_Read(review_no);
+		ReviewVO reviewvo = Review_Service.getReview_Read(review_no);
 		model.addAttribute("reviewvo",reviewvo);
 		return "review_update";
 	}
@@ -110,7 +119,7 @@ public class ReviewController {
 	public ResponseEntity<String> update_review(@PathVariable("no") int no, @RequestBody ReviewVO vo) {
 		ResponseEntity<String> entity = null;
 		try {
-			review_service.Review_Update(no, vo.getReview_title(), vo.getReview_content());
+			Review_Service.Review_Update(no, vo.getReview_title(), vo.getReview_content());
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -122,7 +131,7 @@ public class ReviewController {
 	public ResponseEntity<String> deleteReview(@PathVariable("review_no") Integer review_no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
-			review_service.delete_Review(review_no);
+			Review_Service.delete_Review(review_no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
@@ -133,7 +142,7 @@ public class ReviewController {
 	public ResponseEntity<String> deleteReview_reply(@PathVariable("review_no") Integer review_no) throws Exception{ 
 		ResponseEntity<String> entity = null; 
 		try{ 
-			review_service.delete_Review_Reply(review_no);
+			Review_Service.delete_Review_Reply(review_no);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
 		}catch(Exception e){ 
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
